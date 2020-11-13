@@ -8,6 +8,8 @@ public class BeeSwarm : MonoBehaviour
     [Min(0)]
     public int numBees;
 
+    public Clothes[] clothes = new Clothes[3];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,7 @@ public class BeeSwarm : MonoBehaviour
     }
 
     void OnTriggerEnter (Collider other) {
-        
+
     }
 
 }
