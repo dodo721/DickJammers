@@ -29,6 +29,7 @@ public class BeeSwarm : MonoBehaviour
 
     public Transform cameraTarget;
     private float lockHeight;
+    public List<ParticleSystem> particles;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,15 @@ public class BeeSwarm : MonoBehaviour
             beesClothed.SetActive(false);
             beesUnclothed.SetActive(true);
             wereBeesClothedLastFrame = false;
+        }
+
+        if (clothes.Count == 0) {
+            foreach (ParticleSystem particle in particles) {
+                ParticleSystem.EmissionModule emission = particle.emission;
+                emission.rateOverTime = ((float)numBees / 1000f) * 100f;
+                ParticleSystem.ShapeModule shape = particle.shape;
+                shape.radius = ((float)numBees / 1000f) * 1.5f;
+            }
         }
     }
 
