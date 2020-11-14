@@ -16,11 +16,6 @@ public abstract class Interactable : MonoBehaviour
         // Overwrite this for each interactable
     }
 
-    public virtual void ExtendUpdate()
-    {
-        
-    }
-
     public virtual void DisplayInteractUI()
     {
         // Do later
@@ -36,7 +31,6 @@ public abstract class Interactable : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            DisplayInteractUI();
             canInteract = true;
         }
 
@@ -74,7 +68,5 @@ public abstract class Interactable : MonoBehaviour
                 hasInteracted = true;
             }
         }
-
-        ExtendUpdate();
     }
 }
