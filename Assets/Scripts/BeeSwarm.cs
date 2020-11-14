@@ -41,7 +41,7 @@ public class BeeSwarm : MonoBehaviour
     {
         if(numBees >= 400)
         {
-            numBees -= 200;
+            numBees /= 2;
             Instantiate(newBees, transform.position + Vector3.forward, transform.rotation);
             return true;
         }
