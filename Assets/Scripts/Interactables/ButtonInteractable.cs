@@ -26,17 +26,4 @@ public class ButtonInteractable : Interactable
         base.Update();
         if (canInteract) { DisplayInteractUI(); } else{ RemoveInteractUI();}
     }
-
-    public override void DisplayInteractUI()
-    {
-        base.DisplayInteractUI();
-
-
-    }
-
-    public override void RemoveInteractUI()
-    {
-        base.RemoveInteractUI();
-
-    }
 }
