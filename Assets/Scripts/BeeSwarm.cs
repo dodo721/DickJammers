@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SphereCollider))]
 public class BeeSwarm : MonoBehaviour
 {
+
+    private List<Rigidbody> pushing = new List<Rigidbody>();
+    private SphereCollider sphereCollider;
+
+    public float pushStrength;
 
     [Min(0)]
     public int numBees;
@@ -13,13 +19,24 @@ public class BeeSwarm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        sphereCollider = GetComponent<SphereCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    // Runs every PHYSICS frame
+    void FixedUpdate () {
+        foreach (Rigidbody toPush in pushing) {
+            // Push each object in an outward direction from the swarm center,
+            // TODO: maths????
+            Vector3 force = (toPush.transform.position - transform.position);
+            force *= pushStrength * (1 - sphereCollider.radius);
+            toPush.AddForceAtPosition(force, transform.position, ForceMode.Acceleration);
+        }
     }
 
     public float Visibility () {
@@ -61,8 +78,14 @@ public class BeeSwarm : MonoBehaviour
         return (valLOS * Visibility()) + Noise();
     }
 
-    void OnTriggerEnter (Collider other) {
 
+    // Add/remove pushing objects when they enter/leave range
+    void OnTriggerEnter (Collider other) {
+        pushing.Add(other.GetComponent<Rigidbody>());
+    }
+
+    void OnTriggerExit (Collider other) {
+        pushing.Remove(other.GetComponent<Rigidbody>());
     }
 
 }
