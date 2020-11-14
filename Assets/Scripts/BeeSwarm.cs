@@ -67,17 +67,25 @@ public class BeeSwarm : MonoBehaviour
     {
         if(numBees >= 400)
         {   
-            Vector2 mousePos = new Vector2((Input.mousePosition.x / Screen.width) - 0.5f, (Input.mousePosition.y / Screen.height) - 0.5f);
-            Vector3 translationWorldSpace = new Vector3(mousePos.x, 0, mousePos.y);
-            Vector3 translationCameraSpace = SwarmController.i.cameraTransform.TransformDirection(translationWorldSpace);
-            
-            bool swarmInTheWay = false;
+            Vector3 newPosition = transform.position + (3* SwarmController.i.getDirectionToMouse());
+
+            bool validSpawn = true;
+
             foreach(BeeSwarm bees in allTheBees){
-                if((bees.transform.position - (transform.position + (3 * translationCameraSpace.normalized))).magnitude < 2) swarmInTheWay = true;
+                if((bees.transform.position - newPosition).magnitude < 2) validSpawn = false;
             }
 
-            if(!swarmInTheWay){
-                BeeSwarm spawnedBees = Instantiate(newBees, transform.position + (3 * translationCameraSpace.normalized), transform.rotation).GetComponent<BeeSwarm>();
+            RaycastHit hit;
+            if(Physics.Raycast(newPosition, (transform.position - newPosition), out hit))
+            {
+                if(!(hit.transform == this.transform))
+                {
+                    validSpawn = false;
+                }
+            }
+
+            if(validSpawn){
+                BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
                 numBees /= 2;
                 spawnedBees.numBees = this.numBees;
                 spawnedBees.clothes = new List<Clothes>();
