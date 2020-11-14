@@ -16,6 +16,8 @@ public class BeeSwarm : MonoBehaviour
     public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
     public float pushStrength;
 
+    public GameObject newBees;
+
     [Min(0)]
     public int numBees;
 
@@ -28,12 +30,24 @@ public class BeeSwarm : MonoBehaviour
     {
         sphereCollider = GetComponent<SphereCollider>();
         allTheBees.Add(this);
+        SwarmController.i.SetControlledBeeSwarm(this);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public bool Split()
+    {
+        if(numBees >= 400)
+        {
+            numBees /= 2;
+            Instantiate(newBees, transform.position + Vector3.forward, transform.rotation);
+            return true;
+        }
+        return false;
     }
 
     // Runs every PHYSICS frame
