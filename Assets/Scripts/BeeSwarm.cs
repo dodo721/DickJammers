@@ -92,7 +92,7 @@ public class BeeSwarm : MonoBehaviour
             force *= pushStrength;
             toPush.AddForceAtPosition(force, transform.position, ForceMode.Acceleration);
         }
-        transform.Translate(Vector3.down * (transform.position.y - lockHeight));
+//transform.Translate(Vector3.down * (transform.position.y - lockHeight));
     }
 
     public float Visibility () {
