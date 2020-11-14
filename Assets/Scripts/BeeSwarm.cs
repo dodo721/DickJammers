@@ -86,8 +86,9 @@ public class BeeSwarm : MonoBehaviour
 
             if(validSpawn){
                 BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
-                numBees /= 2;
-                spawnedBees.numBees = this.numBees;
+                int newNumBees = numBees / 2;
+                numBees -= newNumBees;
+                spawnedBees.numBees = newNumBees;
                 spawnedBees.clothes = new List<Clothes>();
                 return true;
             }
