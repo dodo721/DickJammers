@@ -8,7 +8,8 @@ public class BeeSwarm : MonoBehaviour
 
     private List<Rigidbody> pushing = new List<Rigidbody>();
     private SphereCollider sphereCollider;
-
+    
+    public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
     public float pushStrength;
 
     [Min(0)]
@@ -20,6 +21,7 @@ public class BeeSwarm : MonoBehaviour
     void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
+        allTheBees.Add(this);
     }
 
     // Update is called once per frame
