@@ -32,13 +32,13 @@ public class BeeSwarm : MonoBehaviour
 
     // Runs every PHYSICS frame
     void FixedUpdate () {
-        /*foreach (Rigidbody toPush in pushing) {
+        foreach (Rigidbody toPush in pushing) {
             // Push each object in an outward direction from the swarm center,
             // TODO: maths????
             Vector3 force = (toPush.transform.position - transform.position);
             force *= pushStrength;
             toPush.AddForceAtPosition(force, transform.position, ForceMode.Acceleration);
-        }*/
+        }
     }
 
     public float Visibility () {
@@ -84,7 +84,7 @@ public class BeeSwarm : MonoBehaviour
 
     // Add/remove pushing objects when they enter/leave range
     void OnTriggerEnter (Collider other) {
-        pushing.Add(other.GetComponent<Rigidbody>());
+        if (!other.CompareTag("Player")) pushing.Add(other.GetComponent<Rigidbody>());
     }
 
     void OnTriggerExit (Collider other) {

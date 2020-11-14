@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class SwarmController : MonoBehaviour
 {
 
@@ -10,6 +11,11 @@ public class SwarmController : MonoBehaviour
     public float speed;
     public float stopRadius;
     public bool beingDragged;
+    private CharacterController controller;
+
+    void Start () {
+        controller = GetComponent<CharacterController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,7 +36,7 @@ public class SwarmController : MonoBehaviour
             mousePos = new Vector2((Input.mousePosition.x / Screen.width) - 0.5f, (Input.mousePosition.y / Screen.height) - 0.5f);
             Vector3 translationWorldSpace = new Vector3(mousePos.x * speed * Time.deltaTime, 0, mousePos.y * speed * Time.deltaTime);
             Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
-            transform.Translate(translationCameraSpace);
+            controller.Move(translationCameraSpace);
         }
     }
 }
