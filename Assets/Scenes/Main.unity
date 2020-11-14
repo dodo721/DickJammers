@@ -428,7 +428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e3f72e78fa2d24a9219dc10c65e3c3, type: 3}
   m_Name:
   m_EditorClassIdentifier:
-<<<<<<< HEAD
   pushStrength: 5
   numBees: 100
   clothes: []
@@ -448,14 +447,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
-=======
-  pushStrength: 5
-  numBees: 0
-  clothes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
->>>>>>> 2902deb2313878edf12752264ec15998e2621634
+
 --- !u!114 &138258032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,7 +458,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ed67190b149f8e499662662a37972c3, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier:
   mousePos: {x: 0, y: 0}
   cameraTransform: {fileID: 799636895}
