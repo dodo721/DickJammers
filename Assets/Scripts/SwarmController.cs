@@ -99,7 +99,6 @@ public class SwarmController : MonoBehaviour
         Vector3 translationWorldSpace = direction * speed * Time.deltaTime;
         Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
         controller.Move(translationCameraSpace);
-        controller.Move(Vector3.down * (controlling.transform.position.y - controlling.lockHeight));
 
         // DRAGGING
         if (Input.GetButtonDown("Fire1")) {

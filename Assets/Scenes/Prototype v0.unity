@@ -2453,8 +2453,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obliviousness: 6
   alert: 0
-  countDown: 3
-  speed: 2
+  countDown: 1
+  speed: 0
   targetedBees: {fileID: 0}
   noiseLevel: 0
 --- !u!4 &203370460
@@ -5233,7 +5233,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &901064253
 MonoBehaviour:
@@ -11299,7 +11299,7 @@ Transform:
   - {fileID: 1719769475}
   - {fileID: 940863364}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1881573745 stripped
 MonoBehaviour:
@@ -12788,6 +12788,11 @@ PrefabInstance:
     - target: {fileID: 7015353492510660777, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: m_StepOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015353492510660778, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7015353492510660780, guid: 80d1504dae6bc4a49be1291d87f2f57b,
