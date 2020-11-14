@@ -22,6 +22,13 @@ public class SwarmController : MonoBehaviour
         cameraFollower = GetComponent<CameraFollower>();
     }
 
+    public Vector3 getDirectionToMouse() {
+        Vector2 mousePos = new Vector2((Input.mousePosition.x / Screen.width) - 0.5f, (Input.mousePosition.y / Screen.height) - 0.5f);
+        Vector3 translationWorldSpace = new Vector3(mousePos.x, 0, mousePos.y);
+        Vector3 translationCameraSpace = SwarmController.i.cameraTransform.TransformDirection(translationWorldSpace);
+        return translationCameraSpace.normalized;
+    }
+
     // Update is called once per frame
     void Update()
     {
