@@ -61,7 +61,7 @@ public abstract class Interactable : MonoBehaviour
                 if (hit.rigidbody != null)
                 {
                     canSelect = ReferenceEquals(hit.rigidbody.gameObject, gameObject);
-                    Debug.Log("hit ourselves!");
+                    //Debug.Log("hit ourselves!");
                 }
                 else canSelect = false;
             }

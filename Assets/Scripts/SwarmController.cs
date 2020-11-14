@@ -20,7 +20,8 @@ public class SwarmController : MonoBehaviour
     }
 
     void Start () {
-        cameraFollower = GetComponent<CameraFollower>();    }
+        cameraFollower = GetComponent<CameraFollower>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,8 +31,9 @@ public class SwarmController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1")) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            int layerMask = 1 << 8; // Only bees layer
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
                 if (hit.collider.CompareTag("Player") && hit.collider.gameObject == controlling.gameObject) {
                     beingDragged = true;
                 }
