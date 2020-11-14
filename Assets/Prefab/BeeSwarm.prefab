@@ -4876,7 +4876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushStrength: 5
   newBees: {fileID: 7015353492510660780}
-  numBees: 100
+  numBees: 1000
   clothes: []
   cameraTarget: {fileID: 7015353493106767614}
 --- !u!143 &7015353492510660777

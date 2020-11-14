@@ -28,6 +28,7 @@ public class BeeSwarm : MonoBehaviour
     {
         sphereCollider = GetComponent<SphereCollider>();
         allTheBees.Add(this);
+        SwarmController.i.SetControlledBeeSwarm(this);
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class BeeSwarm : MonoBehaviour
         
     }
 
-    bool Split()
+    public bool Split()
     {
         if(numBees >= 400)
         {

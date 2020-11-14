@@ -20,8 +20,7 @@ public class SwarmController : MonoBehaviour
     }
 
     void Start () {
-        cameraFollower = GetComponent<CameraFollower>();
-    }
+        cameraFollower = GetComponent<CameraFollower>();    }
 
     // Update is called once per frame
     void Update()
@@ -39,6 +38,22 @@ public class SwarmController : MonoBehaviour
             }
         } else if (Input.GetButtonUp("Fire1")) {
             beingDragged = false;
+        }
+
+        if(Input.GetButtonDown("Fire2")) {
+            controlling.Split();
+        }
+
+        if(Input.GetButtonDown("Q")){
+            int index = BeeSwarm.allTheBees.IndexOf(controlling);
+            index = (BeeSwarm.allTheBees.Count + index - 1) % BeeSwarm.allTheBees.Count;
+            SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
+        }
+
+        if(Input.GetButtonDown("E")){
+            int index = BeeSwarm.allTheBees.IndexOf(controlling);
+            index = (index + 1) % BeeSwarm.allTheBees.Count;
+            SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
         }
 
         if (beingDragged) {
