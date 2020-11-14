@@ -43,10 +43,18 @@ public class BeeSwarm : MonoBehaviour
     {
         if(numBees >= 400)
         {
-            numBees /= 2;
-            newBees.GetComponent<BeeSwarm>().numBees = this.numBees;
-            Instantiate(newBees, transform.position + (3 * Vector3.forward), transform.rotation);
-            return true;
+            
+            bool swarmInTheWay = false;
+            foreach(BeeSwarm bees in allTheBees){
+                if((bees.transform.position - (transform.position + (3 * Vector3.forward))).magnitude < 2) swarmInTheWay = true;
+            }
+
+            if(!swarmInTheWay){
+                BeeSwarm spawnedBees = Instantiate(newBees, transform.position + (3 * Vector3.forward), transform.rotation).GetComponent<BeeSwarm>();
+                numBees /= 2;
+                spawnedBees.numBees = this.numBees;
+                return true;
+            }
         }
         return false;
     }
@@ -112,11 +120,11 @@ public class BeeSwarm : MonoBehaviour
         else 
         {
             BeeSwarm component = other.GetComponent<BeeSwarm>();
-            if (component != null && other.gameObject != this.gameObject && this == SwarmController.i.GetControlledBeeSwarm())
+            if (component != null && other.gameObject != this.gameObject && this != SwarmController.i.GetControlledBeeSwarm())
             {
-                numBees += component.numBees;
-                allTheBees.Remove(component);
-                Destroy(other.gameObject);
+                component.numBees += numBees;
+                allTheBees.Remove(this);
+                Destroy(this.gameObject);
             }
         }
     }

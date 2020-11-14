@@ -4874,6 +4874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e3f72e78fa2d24a9219dc10c65e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalRadius: 0
+  clothedRadius: 0
   pushStrength: 5
   newBees: {fileID: 7015353492510660780}
   numBees: 1000
