@@ -4876,6 +4876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushStrength: 5
+  newBees: {fileID: 7015353492510660780}
   numBees: 100
   clothes: []
 --- !u!114 &7015353492510660789

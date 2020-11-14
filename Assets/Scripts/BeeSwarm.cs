@@ -13,6 +13,8 @@ public class BeeSwarm : MonoBehaviour
     public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
     public float pushStrength;
 
+    public GameObject newBees;
+
     [Min(0)]
     public int numBees;
 
@@ -29,6 +31,17 @@ public class BeeSwarm : MonoBehaviour
     void Update()
     {
         
+    }
+
+    bool Split()
+    {
+        if(numBees >= 400)
+        {
+            numBees -= 200;
+            Instantiate(newBees, transform.position + Vector3.forward, transform.rotation);
+            return true;
+        }
+        return false;
     }
 
     // Runs every PHYSICS frame
