@@ -27,7 +27,7 @@ public class BeeSwarm : MonoBehaviour
     public List<Clothes> clothes = new List<Clothes>();
 
     public Transform cameraTarget;
-    private float lockHeight;
+    public float lockHeight;
     public List<ParticleSystem> particles;
 
     // Start is called before the first frame update
@@ -60,8 +60,6 @@ public class BeeSwarm : MonoBehaviour
                 shape.radius = ((float)numBees / 1000f) * 1.5f;
             }
         }
-
-        //transform.Translate(Vector3.down * (transform.position.y - lockHeight));
     }
 
     public bool Split()

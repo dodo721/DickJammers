@@ -9,6 +9,8 @@ public class Hive : MonoBehaviour
 
     public int numBees;
 
+    public GameObject destroyedHive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +21,20 @@ public class Hive : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnTriggerEnter (Collider other) {
+        Food food = other.GetComponent<Food>();
+        if (food != null) {
+            numBees += food.numBees;
+            Destroy(food.gameObject);
+        }
+    }
+
+    public void Die () {
+        if (destroyedHive != null) {
+            Instantiate(destroyedHive, transform.position, destroyedHive.transform.rotation);
+        }
+        Destroy(gameObject);
     }
 }

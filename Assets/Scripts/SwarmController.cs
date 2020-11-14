@@ -43,7 +43,24 @@ public class SwarmController : MonoBehaviour
         }
 
         if(Input.GetButtonDown("Fire2")) {
-            controlling.Split();
+            // If over hive, destroy it
+            bool onHive = false;
+            RaycastHit hit;
+            int layerMask = 1 << 8;
+            layerMask = ~layerMask; // All except bees
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            {
+                Debug.Log("Hit " + hit.collider.name);
+                if (hit.collider.CompareTag("Hive") && hit.rigidbody != null && controlling.inRange.Contains(hit.rigidbody))
+                {
+                    Debug.Log("Hive!!!");
+                    Hive hive = hit.collider.GetComponent<Hive>();
+                    hive.Die();
+                    onHive = true;
+                }
+            }
+            if (!onHive) controlling.Split();
         }
 
         if(Input.GetButtonDown("Q")){
@@ -56,6 +73,10 @@ public class SwarmController : MonoBehaviour
             int index = BeeSwarm.allTheBees.IndexOf(controlling);
             index = (index + 1) % BeeSwarm.allTheBees.Count;
             SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
+        }
+
+        if(Input.GetButtonDown("F")){
+            
         }
 
         Vector3 direction = new Vector3();
@@ -78,6 +99,7 @@ public class SwarmController : MonoBehaviour
         Vector3 translationWorldSpace = direction * speed * Time.deltaTime;
         Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
         controller.Move(translationCameraSpace);
+        controller.Move(Vector3.down * (controlling.transform.position.y - controlling.lockHeight));
 
         // DRAGGING
         if (Input.GetButtonDown("Fire1")) {
@@ -119,7 +141,6 @@ public class SwarmController : MonoBehaviour
             // Line drawing
             lineRenderer.enabled = true;
             float colStrength = Mathf.Clamp(mousePos.magnitude * 20, 0f, 1f);
-            Debug.Log(mousePos.magnitude * 20);
             Color lineColor = new Color(1f, 1f - colStrength, 1f - colStrength);
             lineRenderer.startColor = lineColor;
             lineRenderer.endColor = lineColor;
