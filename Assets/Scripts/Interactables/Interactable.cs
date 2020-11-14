@@ -16,11 +16,6 @@ public abstract class Interactable : MonoBehaviour
         // Overwrite this for each interactable
     }
 
-    public virtual void ExtendUpdate()
-    {
-        
-    }
-
     public virtual void DisplayInteractUI()
     {
         // Do later
@@ -36,7 +31,6 @@ public abstract class Interactable : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            DisplayInteractUI();
             canInteract = true;
         }
 
@@ -61,7 +55,7 @@ public abstract class Interactable : MonoBehaviour
                 if (hit.rigidbody != null)
                 {
                     canSelect = ReferenceEquals(hit.rigidbody.gameObject, gameObject);
-                    Debug.Log("hit ourselves!");
+                    //Debug.Log("hit ourselves!");
                 }
                 else canSelect = false;
             }
@@ -71,9 +65,8 @@ public abstract class Interactable : MonoBehaviour
             if (canSelect && Input.GetButtonDown("Fire1"))
             {
                 UseInteractable(SwarmController.i.GetControlledBeeSwarm());
+                hasInteracted = true;
             }
         }
-
-        ExtendUpdate();
     }
 }

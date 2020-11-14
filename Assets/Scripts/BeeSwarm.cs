@@ -13,6 +13,10 @@ public class BeeSwarm : MonoBehaviour
     public float normalRadius;
     public float clothedRadius;
 
+    public GameObject beesUnclothed;
+    public GameObject beesClothed;
+    bool wereBeesClothedLastFrame = false;
+
     public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
     public float pushStrength;
 
@@ -24,6 +28,8 @@ public class BeeSwarm : MonoBehaviour
     public List<Clothes> clothes = new List<Clothes>();
 
     public Transform cameraTarget;
+    private float lockHeight;
+    public List<ParticleSystem> particles;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +37,30 @@ public class BeeSwarm : MonoBehaviour
         sphereCollider = GetComponent<SphereCollider>();
         allTheBees.Add(this);
         SwarmController.i.SetControlledBeeSwarm(this);
+        lockHeight = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (clothes.Count > 0 && !wereBeesClothedLastFrame) {
+            beesClothed.SetActive(true);
+            beesUnclothed.SetActive(false);
+            wereBeesClothedLastFrame = true;
+        } else if (clothes.Count == 0 && wereBeesClothedLastFrame) {
+            beesClothed.SetActive(false);
+            beesUnclothed.SetActive(true);
+            wereBeesClothedLastFrame = false;
+        }
+
+        if (clothes.Count == 0) {
+            foreach (ParticleSystem particle in particles) {
+                ParticleSystem.EmissionModule emission = particle.emission;
+                emission.rateOverTime = ((float)numBees / 1000f) * 100f;
+                ParticleSystem.ShapeModule shape = particle.shape;
+                shape.radius = ((float)numBees / 1000f) * 1.5f;
+            }
+        }
     }
 
     public bool Split()
@@ -68,6 +92,7 @@ public class BeeSwarm : MonoBehaviour
             force *= pushStrength;
             toPush.AddForceAtPosition(force, transform.position, ForceMode.Acceleration);
         }
+        transform.Translate(Vector3.down * (transform.position.y - lockHeight));
     }
 
     public float Visibility () {
@@ -116,7 +141,8 @@ public class BeeSwarm : MonoBehaviour
 
     // Add/remove pushing objects when they enter/leave range
     void OnTriggerEnter (Collider other) {
-        if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null) pushing.Add(other.GetComponent<Rigidbody>());
+        if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && !other.isTrigger)
+            pushing.Add(other.GetComponent<Rigidbody>());
         else 
         {
             BeeSwarm component = other.GetComponent<BeeSwarm>();
@@ -146,5 +172,6 @@ public class BeeSwarm : MonoBehaviour
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 405);
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 500);
     }
+
 
 }

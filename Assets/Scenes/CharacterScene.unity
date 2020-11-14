@@ -137,6 +137,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7015353492424440743, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7015353492510660776, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: m_RootOrder
@@ -145,7 +150,7 @@ PrefabInstance:
     - target: {fileID: 7015353492510660776, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.18
+      value: -6.78
       objectReference: {fileID: 0}
     - target: {fileID: 7015353492510660776, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
@@ -194,9 +199,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
+      propertyPath: beesClothed
+      value: 
+      objectReference: {fileID: 540473427}
+    - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
       propertyPath: normalRadius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: beesUnclothed
+      value: 
+      objectReference: {fileID: 736486062}
     - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: clothedRadius
@@ -208,26 +223,67 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7015353492510660780, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
+    - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: particles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: particles.Array.data[0]
+      value: 
+      objectReference: {fileID: 736486065}
+    - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: particles.Array.data[1]
+      value: 
+      objectReference: {fileID: 2072411868}
     - target: {fileID: 7015353492510660780, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: m_Name
       value: BeeSwarm
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015353492510660780, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7015353492510660789, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 375516996}
+    - target: {fileID: 7015353493106767615, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015353493780157834, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015353493991986111, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7015353493991986111, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d1504dae6bc4a49be1291d87f2f57b, type: 3}
 --- !u!4 &50158933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7015353492510660776, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+    type: 3}
+  m_PrefabInstance: {fileID: 50158932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &271629248 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 7015353492510660777, guid: 80d1504dae6bc4a49be1291d87f2f57b,
     type: 3}
   m_PrefabInstance: {fileID: 50158932}
   m_PrefabAsset: {fileID: 0}
@@ -262,7 +318,7 @@ GameObject:
   - component: {fileID: 289230086}
   - component: {fileID: 289230088}
   - component: {fileID: 289230087}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5090,13 +5146,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 540473428}
-  m_Layer: 0
+  - component: {fileID: 540473429}
+  m_Layer: 8
   m_Name: ClothedBees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &540473428
 Transform:
   m_ObjectHideFlags: 0
@@ -5115,6 +5172,20 @@ Transform:
   m_Father: {fileID: 50158933}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &540473429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540473427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fb7f2a49acc9b4e8dc527e3a81f156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 271629248}
+  rotationSpeed: 10
 --- !u!1001 &682299782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5199,6 +5270,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ca4909e7bda974d91cf12ea08c05aa, type: 3}
+--- !u!1 &736486062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7015353493991986111, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+    type: 3}
+  m_PrefabInstance: {fileID: 50158932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &736486065 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7015353493991986104, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+    type: 3}
+  m_PrefabInstance: {fileID: 50158932}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1056799791
 GameObject:
   m_ObjectHideFlags: 0
@@ -5210,7 +5293,7 @@ GameObject:
   - component: {fileID: 1056799792}
   - component: {fileID: 1056799794}
   - component: {fileID: 1056799793}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles CLOTHED (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10038,6 +10121,8 @@ MonoBehaviour:
   visibilityMod: 0.5
   noiseMod: 0.5
   speedMod: 0.7
+  bobMagnitude: 0.3
+  bobFrequency: 1
 --- !u!114 &1062431768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10045,12 +10130,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062431766}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03fb7f2a49acc9b4e8dc527e3a81f156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  rotationSpeed: 1
 --- !u!135 &1062431769
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10062,7 +10148,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.16
+  m_Radius: 14.5
   m_Center: {x: 0, y: 1.68, z: 0}
 --- !u!54 &1062431770
 Rigidbody:
@@ -10091,7 +10177,7 @@ GameObject:
   - component: {fileID: 1136511205}
   - component: {fileID: 1136511207}
   - component: {fileID: 1136511206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14923,7 +15009,7 @@ GameObject:
   - component: {fileID: 1377433825}
   - component: {fileID: 1377433827}
   - component: {fileID: 1377433826}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles CLOTHED
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19736,7 +19822,7 @@ GameObject:
   - component: {fileID: 1720488466}
   - component: {fileID: 1720488468}
   - component: {fileID: 1720488467}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24616,28 +24702,73 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6567243724943544834, guid: e07243afaba98d0489c0161108146256,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.345071
+      objectReference: {fileID: 0}
+    - target: {fileID: -6567243724943544834, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.98696876
+      value: 0.9999719
       objectReference: {fileID: 0}
     - target: {fileID: -6567243724943544834, guid: e07243afaba98d0489c0161108146256,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00000008039883
+      value: 0.00000007704584
       objectReference: {fileID: 0}
     - target: {fileID: -6567243724943544834, guid: e07243afaba98d0489c0161108146256,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.1609121
+      value: 0.0074952366
       objectReference: {fileID: 0}
     - target: {fileID: -6567243724943544834, guid: e07243afaba98d0489c0161108146256,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000013107954
+      value: -0.000000026452517
       objectReference: {fileID: 0}
     - target: {fileID: -6567243724943544834, guid: e07243afaba98d0489c0161108146256,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -18.52
+      value: 0.859
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.67312604
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5666506
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.2729085
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.38901076
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -77.209
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 19.379
+      objectReference: {fileID: 0}
+    - target: {fileID: -2239965893361130109, guid: e07243afaba98d0489c0161108146256,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -75.574
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e07243afaba98d0489c0161108146256,
         type: 3}
@@ -24657,7 +24788,7 @@ GameObject:
   - component: {fileID: 1904606704}
   - component: {fileID: 1904606706}
   - component: {fileID: 1904606705}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29469,7 +29600,7 @@ GameObject:
   - component: {fileID: 1944254918}
   - component: {fileID: 1944254920}
   - component: {fileID: 1944254919}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles CLOTHED (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34439,6 +34570,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &2072411868 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7015353492424440736, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+    type: 3}
+  m_PrefabInstance: {fileID: 50158932}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2076139436
 GameObject:
   m_ObjectHideFlags: 0
@@ -34450,7 +34587,7 @@ GameObject:
   - component: {fileID: 2076139437}
   - component: {fileID: 2076139439}
   - component: {fileID: 2076139438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BEES particles CLOTHED (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
