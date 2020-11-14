@@ -60,6 +60,12 @@ public class BeeSwarm : MonoBehaviour
                 shape.radius = ((float)numBees / 1000f) * 1.5f;
             }
         }
+
+        if(numBees < 100)
+        {
+            allTheBees.Remove(this);
+            Destroy(this.gameObject);
+        }
     }
 
     public bool Split()
@@ -85,8 +91,9 @@ public class BeeSwarm : MonoBehaviour
 
             if(validSpawn){
                 BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
-                numBees /= 2;
-                spawnedBees.numBees = this.numBees;
+                int newNumBees = numBees / 2;
+                numBees -= newNumBees;
+                spawnedBees.numBees = newNumBees;
                 spawnedBees.clothes = new List<Clothes>();
                 return true;
             }
@@ -94,7 +101,8 @@ public class BeeSwarm : MonoBehaviour
         return false;
     }
 
-    public float Visibility () {
+    public float Visibility (Enemy enemy, float visFactor = .2f) {
+        
         // TODO: Fill in
         float clothesFactor = 1;
 
@@ -102,22 +110,6 @@ public class BeeSwarm : MonoBehaviour
             clothesFactor *= item.GetVisibilityModifier();
         }
 
-        return clothesFactor * Mathf.Pow(numBees, .5f);
-    }
-
-    public float Noise () {
-        // TODO: Fill in
-        float clothesFactor = 1;
-
-        foreach (Clothes item in clothes){
-            clothesFactor *= item.GetNoiseModifier();
-        }
-
-        return clothesFactor * numBees;
-    }
-
-    public float Conspicuiosness (Enemy enemy) {
-        // TODO: Fill in
         RaycastHit hit;
         int valLOS = 0;
 
@@ -129,12 +121,24 @@ public class BeeSwarm : MonoBehaviour
             }
         }
 
+        return valLOS * visFactor * clothesFactor * Mathf.Pow(numBees, .5f);
+    }
+
+    public float Noise (Enemy enemy, float noiseFactor = .2f) {
+        // TODO: Fill in
+        float clothesFactor = 1;
+
+        foreach (Clothes item in clothes){
+            clothesFactor *= item.GetNoiseModifier();
+        }
+
         float distNoiseMod = 1 / Mathf.Pow(((this.transform.position - enemy.transform.position).magnitude), 2f);
-        float noiseFactor = .2f;
 
-        float visFactor = .2f;
+        return distNoiseMod * noiseFactor * clothesFactor * numBees;
+    }
 
-        return (valLOS * visFactor * Visibility()) +(distNoiseMod * noiseFactor * Noise());
+    public float Conspicuiosness (Enemy enemy, float noiseFactor = .2f, float visFactor = .2f) {
+        return Visibility(enemy, visFactor) + Noise(enemy, noiseFactor);
     }
 
 
@@ -142,15 +146,19 @@ public class BeeSwarm : MonoBehaviour
     void OnTriggerEnter (Collider other) {
         if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && !other.isTrigger)
             inRange.Add(other.GetComponent<Rigidbody>());
-        else 
+        else if (other.GetComponent<BeeSwarm>() != null)
         {
             BeeSwarm component = other.GetComponent<BeeSwarm>();
-            if (component != null && other.gameObject != this.gameObject && this != SwarmController.i.GetControlledBeeSwarm())
+            if (other.gameObject != this.gameObject && this != SwarmController.i.GetControlledBeeSwarm())
             {
                 component.numBees += numBees;
                 allTheBees.Remove(this);
                 Destroy(this.gameObject);
             }
+        }
+        else if (other.GetComponent<Enemy>() != null)
+        {
+            numBees -= (numBees/10);
         }
     }
 
