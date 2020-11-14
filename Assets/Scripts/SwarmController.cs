@@ -8,6 +8,7 @@ public class SwarmController : MonoBehaviour
     public Vector2 mousePos;
     public Transform cameraTransform;
     public float speed;
+    public float stopRadius;
     public bool beingDragged;
 
     // Update is called once per frame
