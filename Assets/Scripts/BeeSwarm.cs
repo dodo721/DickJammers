@@ -44,7 +44,8 @@ public class BeeSwarm : MonoBehaviour
         if(numBees >= 400)
         {
             numBees /= 2;
-            Instantiate(newBees, transform.position + Vector3.forward, transform.rotation);
+            newBees.GetComponent<BeeSwarm>().numBees = this.numBees;
+            Instantiate(newBees, transform.position + (3 * Vector3.forward), transform.rotation);
             return true;
         }
         return false;
@@ -108,6 +109,16 @@ public class BeeSwarm : MonoBehaviour
     // Add/remove pushing objects when they enter/leave range
     void OnTriggerEnter (Collider other) {
         if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null) pushing.Add(other.GetComponent<Rigidbody>());
+        else 
+        {
+            BeeSwarm component = other.GetComponent<BeeSwarm>();
+            if (component != null && other.gameObject != this.gameObject && this == SwarmController.i.GetControlledBeeSwarm())
+            {
+                numBees += component.numBees;
+                allTheBees.Remove(component);
+                Destroy(other.gameObject);
+            }
+        }
     }
 
     void OnTriggerExit (Collider other) {
