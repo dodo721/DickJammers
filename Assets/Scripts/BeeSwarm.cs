@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -49,7 +50,7 @@ public class BeeSwarm : MonoBehaviour
             clothesFactor *= item.GetVisibilityModifier();
         }
 
-        return clothesFactor * Mathf.Pow(numBees, 2/3);
+        return clothesFactor * Mathf.Pow(numBees, .5f);
     }
 
     public float Noise () {
@@ -60,7 +61,7 @@ public class BeeSwarm : MonoBehaviour
             clothesFactor *= item.GetNoiseModifier();
         }
 
-        return clothesFactor * Mathf.Pow(numBees, 2/3);
+        return clothesFactor * numBees;
     }
 
     public float Conspicuiosness (Enemy enemy) {
@@ -76,9 +77,12 @@ public class BeeSwarm : MonoBehaviour
             }
         }
 
-        float distNoiseMod = 1 / Mathf.Pow(((this.transform.position - enemy.transform.position).magnitude), 1/2);
+        float distNoiseMod = 1 / Mathf.Pow(((this.transform.position - enemy.transform.position).magnitude), 2f);
+        float noiseFactor = .2f;
 
-        return (valLOS * Visibility()) +(distNoiseMod * Noise());
+        float visFactor = .2f;
+
+        return (valLOS * visFactor * Visibility()) +(distNoiseMod * noiseFactor * Noise());
     }
 
 
@@ -89,6 +93,20 @@ public class BeeSwarm : MonoBehaviour
 
     void OnTriggerExit (Collider other) {
         pushing.Remove(other.GetComponent<Rigidbody>());
+    }
+
+    void OnDrawGizmos ()
+    {
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 5);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 20);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 45);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 80);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 125);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 180);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 245);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 320);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 405);
+        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 500);
     }
 
 }
