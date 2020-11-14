@@ -23,7 +23,7 @@ public class Clothes : Interactable
         return speedMod;
     }
 
-    public override void UseInteractable()
+    public override void UseInteractable(BeeSwarm bees)
     {
         
     }

@@ -11,7 +11,7 @@ public abstract class Interactable : MonoBehaviour
     public int beesRequired = 0;
     public int beesConsumed = 0;
 
-    public virtual void UseInteractable()
+    public virtual void UseInteractable(BeeSwarm bees)
     {
         // Overwrite this for each interactable
     }
@@ -70,7 +70,7 @@ public abstract class Interactable : MonoBehaviour
             // If we can select and are wanting to interact with the interactable...
             if (canSelect && Input.GetButtonDown("Fire1"))
             {
-                UseInteractable();
+                UseInteractable(SwarmController.i.GetControlledBeeSwarm());
             }
         }
 

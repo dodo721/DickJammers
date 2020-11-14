@@ -16,9 +16,9 @@ public class DoubleButtonInteractable : Interactable
     public Material FullyInteractedColour;
     private Material[] colList = new Material[3];
 
-    public override void UseInteractable()
+    public override void UseInteractable(BeeSwarm bees)
     {
-        base.UseInteractable();
+        base.UseInteractable(bees);
         if (brotherButton.pressed)
         {
             print(brotherButton.pressed);
