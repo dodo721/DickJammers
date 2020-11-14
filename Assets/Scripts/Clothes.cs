@@ -20,7 +20,8 @@ public class Clothes : Interactable
         rb = GetComponent<Rigidbody>();
     }
 
-    public override void ExtendUpdate () {
+    protected override void Update () {
+        base.Update();
         transform.Translate(Vector3.down * Time.deltaTime * Mathf.Sin(Time.time * bobFrequency) * bobMagnitude);
     }
 

@@ -10208,12 +10208,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &1762883221 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 254404703953258733, guid: f4ca4909e7bda974d91cf12ea08c05aa,
-    type: 3}
-  m_PrefabInstance: {fileID: 1333100748}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1800651231
 Mesh:
   m_ObjectHideFlags: 0
@@ -12788,21 +12782,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7015353492510660777, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: m_SlopeLimit
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7015353492510660780, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: m_Name
       value: BeeSwarm
       objectReference: {fileID: 0}
-    - target: {fileID: 7015353492510660789, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: cameraTransform
-      value: 
-      objectReference: {fileID: 1762883221}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d1504dae6bc4a49be1291d87f2f57b, type: 3}
 --- !u!1 &2006589187
