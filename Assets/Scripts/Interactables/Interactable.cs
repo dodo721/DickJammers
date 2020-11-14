@@ -68,7 +68,7 @@ public abstract class Interactable : MonoBehaviour
             else canSelect = false;
 
             // If we can select and are wanting to interact with the interactable...
-            if (canSelect && Input.GetKey(KeyCode.Mouse0))
+            if (canSelect && Input.GetButtonDown("Fire1"))
             {
                 UseInteractable();
             }

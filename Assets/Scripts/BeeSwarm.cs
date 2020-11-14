@@ -10,7 +10,9 @@ public class BeeSwarm : MonoBehaviour
 
     private List<Rigidbody> pushing = new List<Rigidbody>();
     private SphereCollider sphereCollider;
-    
+    public float normalRadius;
+    public float clothedRadius;
+
     public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
     public float pushStrength;
 
