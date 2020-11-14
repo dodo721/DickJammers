@@ -8,10 +8,22 @@ public class ButtonInteractable : Interactable
     public GameObject LockedDoor;
     public Material AfterInteractColour;
 
+    private void Start()
+    {
+
+    }
+
     public override void UseInteractable(BeeSwarm bees)
+
     {
         base.UseInteractable(bees);
         GetComponent<Renderer>().material = AfterInteractColour;
         GameObject.Destroy(LockedDoor);
+    }
+
+    protected virtual void Update()
+    {
+        base.Update();
+        if (canInteract) { DisplayInteractUI(); } else{ RemoveInteractUI();}
     }
 }

@@ -6,6 +6,7 @@ public class FaceMovement : MonoBehaviour
 {
 
     public CharacterController controller;
+    public float rotationSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,10 @@ public class FaceMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controller) transform.LookAt(transform.position + controller.velocity);
+        if (controller != null) {
+            Vector3 lookat = transform.position + controller.velocity;
+            Quaternion lookRot = Quaternion.LookRotation(lookat, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
+        }
     }
 }

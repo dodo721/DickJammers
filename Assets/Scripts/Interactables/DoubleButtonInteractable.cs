@@ -16,22 +16,41 @@ public class DoubleButtonInteractable : Interactable
     public Material FullyInteractedColour;
     private Material[] colList = new Material[3];
 
+    public GameObject uiTimer;
+    public Transform uiTimerPos;
+    public Transform uiTimerRot;
+    private GameObject countdownObj;
+   
     public override void UseInteractable(BeeSwarm bees)
     {
         base.UseInteractable(bees);
         if (brotherButton.pressed)
         {
-            print(brotherButton.pressed);
             GameObject.Destroy(lockedDoor);
+            GameObject.Destroy(countdownObj);
+
             changeColour(2);
             brotherButton.changeColour(2);
 
             countdownButtons = false;
             brotherButton.countdownButtons = false;
-        } else {
+            brotherButton.DestroyTimer();
+            
+            
+        } else if (this.pressed == false)
+        {
             this.pressed = true;
             changeColour(1);
+            countdownObj = (GameObject)Instantiate(uiTimer, gameObject.transform.position, gameObject.transform.rotation);
+            countdownObj.transform.localPosition = uiTimerPos.transform.position; 
+            countdownObj.GetComponent<Countdown>().passParam(resetTime);
         }
+    }
+
+
+    public void DestroyTimer()
+    {
+        GameObject.Destroy(countdownObj);
     }
 
     public void Start()
