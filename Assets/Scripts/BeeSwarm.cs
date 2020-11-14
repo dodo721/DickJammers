@@ -68,14 +68,15 @@ public class BeeSwarm : MonoBehaviour
 
         if(Physics.Raycast(enemy.transform.position, (transform.position - enemy.transform.position), out hit))
         {
-            if(hit.transform == this)
+            if(hit.transform == this.transform)
             {
                 valLOS = 1;
             }
         }
 
-        float distNoiseMod = (this.transform.position - enemy.transform.position).magnitude;
-        return (valLOS * Visibility()) + Noise();
+        float distNoiseMod = 1 / Mathf.Pow(((this.transform.position - enemy.transform.position).magnitude), 1/2);
+
+        return (valLOS * Visibility()) +(distNoiseMod * Noise());
     }
 
 
