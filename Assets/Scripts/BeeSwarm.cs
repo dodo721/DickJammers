@@ -172,6 +172,20 @@ public class BeeSwarm : MonoBehaviour
         pushing.Remove(other.GetComponent<Rigidbody>());
     }
 
+    public bool HasClothes () {
+        return clothes.Count > 0;
+    }
+
+    public static int GetNumUnusedBees () {
+        int sum = 0;
+        foreach (BeeSwarm bees in allTheBees) {
+            if (!bees.HasClothes()) {
+                sum += bees.numBees;
+            }
+        }
+        return sum;
+    }
+
     void OnDrawGizmos ()
     {
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 5);
