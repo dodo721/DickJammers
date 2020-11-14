@@ -88,7 +88,7 @@ public class BeeSwarm : MonoBehaviour
 
     // Add/remove pushing objects when they enter/leave range
     void OnTriggerEnter (Collider other) {
-        if (!other.CompareTag("Player")) pushing.Add(other.GetComponent<Rigidbody>());
+        if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null) pushing.Add(other.GetComponent<Rigidbody>());
     }
 
     void OnTriggerExit (Collider other) {
