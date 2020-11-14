@@ -34,7 +34,7 @@ public class BeeSwarm : MonoBehaviour
             // Push each object in an outward direction from the swarm center,
             // TODO: maths????
             Vector3 force = (toPush.transform.position - transform.position);
-            force *= pushStrength * (1 - sphereCollider.radius);
+            force *= pushStrength;
             toPush.AddForceAtPosition(force, transform.position, ForceMode.Acceleration);
         }
     }

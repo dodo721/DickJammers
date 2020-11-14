@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 138258030}
   - component: {fileID: 138258032}
   - component: {fileID: 138258031}
+  - component: {fileID: 138258027}
   m_Layer: 0
   m_Name: BeeSwarm
   m_TagString: Player
@@ -379,7 +380,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.95
+  m_Radius: 1.3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &138258027
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138258025}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &138258029
 Transform:
@@ -410,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e3f72e78fa2d24a9219dc10c65e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushStrength: 250
+  pushStrength: 50
   numBees: 0
   clothes:
   - {fileID: 0}
@@ -447,6 +461,7 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0}
   cameraTransform: {fileID: 799636895}
   speed: 20
+  stopRadius: 0
   beingDragged: 0
 --- !u!1 &253248866
 GameObject:
@@ -5824,13 +5839,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799636894}
-  m_LocalRotation: {x: -0.21643952, y: 0, z: 0, w: 0.97629607}
+  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 963194228}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!1 &861164086
 GameObject:
   m_ObjectHideFlags: 0
@@ -6021,14 +6036,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.19996412, y: 0.3736123, z: -0.08282785, w: 0.90198}
-  m_LocalPosition: {x: -9.88, y: 9.22, z: -11.63}
+  m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
+  m_LocalPosition: {x: -9.88, y: 16.800001, z: -11.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 799636895}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 25, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6399,7 +6414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421199418}
   m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -9.88, y: 7.69, z: -9.76}
+  m_LocalPosition: {x: -9.88, y: 15.27, z: -9.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 138258029}
@@ -20855,8 +20870,9 @@ GameObject:
   - component: {fileID: 1665018150}
   - component: {fileID: 1665018149}
   - component: {fileID: 1665018148}
+  - component: {fileID: 1665018152}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20932,12 +20948,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665018147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.69, y: 0, z: 2.05}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.69, y: 1.98, z: 2.05}
+  m_LocalScale: {x: 0.76878, y: 4.6461, z: 3.461}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1665018152
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665018147}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1866607248
 GameObject:
   m_ObjectHideFlags: 0
@@ -21124,7 +21156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086054735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.35, z: 0}
+  m_LocalPosition: {x: 0, y: -1.54, z: 0}
   m_LocalScale: {x: 2, y: 0.31, z: 2}
   m_Children: []
   m_Father: {fileID: 138258029}
