@@ -4,31 +4,50 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CharacterController))]
 public class BeeSwarm : MonoBehaviour
 {
 
     private List<Rigidbody> pushing = new List<Rigidbody>();
     private SphereCollider sphereCollider;
-    
+    public float normalRadius;
+    public float clothedRadius;
+
     public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
     public float pushStrength;
+
+    public GameObject newBees;
 
     [Min(0)]
     public int numBees;
 
     public List<Clothes> clothes = new List<Clothes>();
 
+    public Transform cameraTarget;
+
     // Start is called before the first frame update
     void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
         allTheBees.Add(this);
+        SwarmController.i.SetControlledBeeSwarm(this);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public bool Split()
+    {
+        if(numBees >= 400)
+        {
+            numBees /= 2;
+            Instantiate(newBees, transform.position + Vector3.forward, transform.rotation);
+            return true;
+        }
+        return false;
     }
 
     // Runs every PHYSICS frame

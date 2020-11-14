@@ -2,9 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Clothes : MonoBehaviour
+public class Clothes : Interactable
 {
-    public abstract float GetVisibilityModifier();
-    public abstract float GetRequiredBees();
-    public abstract float GetNoiseModifier();
+
+    public float visibilityMod;
+    public float noiseMod;
+    public float speedMod;
+
+    public float GetVisibilityModifier() {
+        return visibilityMod;
+    }
+    public float GetRequiredBees() {
+        return beesRequired;
+    }
+    public float GetNoiseModifier() {
+        return noiseMod;
+    }
+
+    public float GetSpeedModifier () {
+        return speedMod;
+    }
+
+    public override void UseInteractable(BeeSwarm bees)
+    {
+        
+    }
 }

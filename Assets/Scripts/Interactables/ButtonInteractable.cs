@@ -8,16 +8,15 @@ public class ButtonInteractable : Interactable
     public GameObject LockedDoor;
     public Material AfterInteractColour;
 
-    Canvas messageCanvas;
-
     private void Start()
     {
 
     }
 
-    public override void UseInteractable()
+    public override void UseInteractable(BeeSwarm bees)
+
     {
-        base.UseInteractable();
+        base.UseInteractable(bees);
         GetComponent<Renderer>().material = AfterInteractColour;
         GameObject.Destroy(LockedDoor);
     }
