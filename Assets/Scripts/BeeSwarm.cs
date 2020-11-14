@@ -8,7 +8,7 @@ using UnityEngine;
 public class BeeSwarm : MonoBehaviour
 {
 
-    private List<Rigidbody> pushing = new List<Rigidbody>();
+    public List<Rigidbody> inRange = new List<Rigidbody>();
     private SphereCollider sphereCollider;
     public float normalRadius;
     public float clothedRadius;
@@ -18,7 +18,6 @@ public class BeeSwarm : MonoBehaviour
     bool wereBeesClothedLastFrame = false;
 
     public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
-    public float pushStrength;
 
     public GameObject newBees;
 
@@ -43,17 +42,17 @@ public class BeeSwarm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (clothes.Count > 0 && !wereBeesClothedLastFrame) {
+        if (HasClothes() && !wereBeesClothedLastFrame) {
             beesClothed.SetActive(true);
             beesUnclothed.SetActive(false);
             wereBeesClothedLastFrame = true;
-        } else if (clothes.Count == 0 && wereBeesClothedLastFrame) {
+        } else if (!HasClothes() && wereBeesClothedLastFrame) {
             beesClothed.SetActive(false);
             beesUnclothed.SetActive(true);
             wereBeesClothedLastFrame = false;
         }
 
-        if (clothes.Count == 0) {
+        if (!HasClothes()) {
             foreach (ParticleSystem particle in particles) {
                 ParticleSystem.EmissionModule emission = particle.emission;
                 emission.rateOverTime = ((float)numBees / 1000f) * 100f;
@@ -61,6 +60,8 @@ public class BeeSwarm : MonoBehaviour
                 shape.radius = ((float)numBees / 1000f) * 1.5f;
             }
         }
+
+        //transform.Translate(Vector3.down * (transform.position.y - lockHeight));
     }
 
     public bool Split()
@@ -93,18 +94,6 @@ public class BeeSwarm : MonoBehaviour
             }
         }
         return false;
-    }
-
-    // Runs every PHYSICS frame
-    void FixedUpdate () {
-        foreach (Rigidbody toPush in pushing) {
-            // Push each object in an outward direction from the swarm center,
-            // TODO: maths????
-            Vector3 force = (toPush.transform.position - transform.position);
-            force *= pushStrength;
-            toPush.AddForceAtPosition(force, transform.position, ForceMode.Acceleration);
-        }
-        transform.Translate(Vector3.down * (transform.position.y - lockHeight));
     }
 
     public float Visibility () {
@@ -154,7 +143,7 @@ public class BeeSwarm : MonoBehaviour
     // Add/remove pushing objects when they enter/leave range
     void OnTriggerEnter (Collider other) {
         if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && !other.isTrigger)
-            pushing.Add(other.GetComponent<Rigidbody>());
+            inRange.Add(other.GetComponent<Rigidbody>());
         else 
         {
             BeeSwarm component = other.GetComponent<BeeSwarm>();
@@ -168,7 +157,7 @@ public class BeeSwarm : MonoBehaviour
     }
 
     void OnTriggerExit (Collider other) {
-        pushing.Remove(other.GetComponent<Rigidbody>());
+        inRange.Remove(other.GetComponent<Rigidbody>());
     }
 
     public bool HasClothes () {
@@ -187,6 +176,8 @@ public class BeeSwarm : MonoBehaviour
 
     void OnDrawGizmos ()
     {
+        Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
+        Gizmos.DrawSphere(transform.position, GetComponent<SphereCollider>().radius);
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 5);
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 20);
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 45);

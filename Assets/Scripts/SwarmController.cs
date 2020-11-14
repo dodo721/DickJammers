@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CameraFollower))]
+[RequireComponent(typeof(LineRenderer))]
 public class SwarmController : MonoBehaviour
 {
 
@@ -10,16 +11,21 @@ public class SwarmController : MonoBehaviour
     public Vector2 mousePos;
     public Transform cameraTransform;
     public CameraFollower cameraFollower;
+    public LineRenderer lineRenderer;
     public float speed;
+    public float dragStrength;
     private CharacterController controller;
     public static SwarmController i;
+    public Rigidbody draggingObject;
 
     void Awake () {
-        i = this;
+        if (i == null) i = this;
+        else Debug.LogError("There should only be 1 SwarmController in the scene!");
     }
 
     void Start () {
         cameraFollower = GetComponent<CameraFollower>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     public Vector3 getDirectionToMouse() {
@@ -72,6 +78,58 @@ public class SwarmController : MonoBehaviour
         Vector3 translationWorldSpace = direction * speed * Time.deltaTime;
         Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
         controller.Move(translationCameraSpace);
+
+        // DRAGGING
+        if (Input.GetButtonDown("Fire1")) {
+            // Check if the mouse is over any in range objects
+            RaycastHit hit;
+            int layerMask = 1 << 8;
+            layerMask = ~layerMask; // All except bees
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            {
+                if (hit.rigidbody != null && controlling.inRange.Contains(hit.rigidbody) && !hit.rigidbody.isKinematic)
+                {
+                    draggingObject = hit.rigidbody;
+                }
+            }
+        }
+        if (Input.GetButtonUp("Fire1")) {
+            draggingObject = null;
+        }
+        if (draggingObject != null) {
+            if (!controlling.inRange.Contains(draggingObject)) {
+                draggingObject = null;
+            }
+        }
+    }
+
+    // Runs every PHYSICS frame
+    void FixedUpdate () {
+        if (draggingObject != null) {
+            
+            // Force
+            Vector3 objectScreenPos = Camera.main.WorldToViewportPoint(draggingObject.transform.position) - new Vector3(0.5f, 0.5f, 0);
+            Vector2 mousePos = new Vector2((Input.mousePosition.x / Screen.width) - 0.5f - objectScreenPos.x, (Input.mousePosition.y / Screen.height) - 0.5f - objectScreenPos.y);
+            Vector3 directionWorldSpace = new Vector3(mousePos.x, 0, mousePos.y);
+            Vector3 directionCameraSpace = SwarmController.i.cameraTransform.TransformDirection(directionWorldSpace);
+            float forceMag = directionCameraSpace.magnitude * dragStrength;
+            draggingObject.AddForce(directionCameraSpace * forceMag, ForceMode.Acceleration);
+
+            // Line drawing
+            lineRenderer.enabled = true;
+            float colStrength = Mathf.Clamp(mousePos.magnitude * 20, 0f, 1f);
+            Debug.Log(mousePos.magnitude * 20);
+            Color lineColor = new Color(1f, 1f - colStrength, 1f - colStrength);
+            lineRenderer.startColor = lineColor;
+            lineRenderer.endColor = lineColor;
+            lineRenderer.SetPositions(new Vector3[] {
+                draggingObject.transform.position,
+                draggingObject.transform.position + directionCameraSpace * 10
+            });
+        } else {
+            lineRenderer.enabled = false;
+        }
     }
 
     public BeeSwarm GetControlledBeeSwarm () {
