@@ -42,17 +42,21 @@ public class BeeSwarm : MonoBehaviour
     public bool Split()
     {
         if(numBees >= 400)
-        {
+        {   
+            Vector2 mousePos = new Vector2((Input.mousePosition.x / Screen.width) - 0.5f, (Input.mousePosition.y / Screen.height) - 0.5f);
+            Vector3 translationWorldSpace = new Vector3(mousePos.x, 0, mousePos.y);
+            Vector3 translationCameraSpace = SwarmController.i.cameraTransform.TransformDirection(translationWorldSpace);
             
             bool swarmInTheWay = false;
             foreach(BeeSwarm bees in allTheBees){
-                if((bees.transform.position - (transform.position + (3 * Vector3.forward))).magnitude < 2) swarmInTheWay = true;
+                if((bees.transform.position - (transform.position + (3 * translationCameraSpace.normalized))).magnitude < 2) swarmInTheWay = true;
             }
 
             if(!swarmInTheWay){
-                BeeSwarm spawnedBees = Instantiate(newBees, transform.position + (3 * Vector3.forward), transform.rotation).GetComponent<BeeSwarm>();
+                BeeSwarm spawnedBees = Instantiate(newBees, transform.position + (3 * translationCameraSpace.normalized), transform.rotation).GetComponent<BeeSwarm>();
                 numBees /= 2;
                 spawnedBees.numBees = this.numBees;
+                spawnedBees.clothes = new List<Clothes>();
                 return true;
             }
         }
