@@ -40,12 +40,14 @@ public class Clothes : Interactable
 
     public override void UseInteractable(BeeSwarm bees)
     {
-        bees.clothes.Add(this);
-        transform.rotation = bees.transform.rotation;
-        faceMovement.controller = bees.GetComponent<CharacterController>();
-        faceMovement.enabled = true;
-        transform.SetParent(bees.transform);
-        transform.localPosition = Vector3.zero;
-        rb.isKinematic = true;
+        if (!hasInteracted) {
+            bees.clothes.Add(this);
+            transform.rotation = bees.transform.rotation;
+            faceMovement.controller = bees.GetComponent<CharacterController>();
+            faceMovement.enabled = true;
+            transform.SetParent(bees.transform);
+            transform.localPosition = Vector3.zero;
+            rb.isKinematic = true;
+        }
     }
 }

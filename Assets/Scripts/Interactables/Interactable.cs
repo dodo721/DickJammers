@@ -71,6 +71,7 @@ public abstract class Interactable : MonoBehaviour
             if (canSelect && Input.GetButtonDown("Fire1"))
             {
                 UseInteractable(SwarmController.i.GetControlledBeeSwarm());
+                hasInteracted = true;
             }
         }
 
