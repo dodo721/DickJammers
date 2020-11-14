@@ -13,6 +13,11 @@ public class SwarmController : MonoBehaviour
     public float speed;
     public bool beingDragged;
     private CharacterController controller;
+    public static SwarmController i;
+
+    void Awake () {
+        i = this;
+    }
 
     void Start () {
         cameraFollower = GetComponent<CameraFollower>();
