@@ -1209,6 +1209,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1337466388 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7015353492375699141}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e3f72e78fa2d24a9219dc10c65e3c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1340515489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,6 +1797,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ca4909e7bda974d91cf12ea08c05aa, type: 3}
+--- !u!1 &254404703410713971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 254404703789701123, guid: f4ca4909e7bda974d91cf12ea08c05aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 254404703410713970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &254404703410713972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254404703410713971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed67190b149f8e499662662a37972c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlling: {fileID: 1337466388}
+  mousePos: {x: 0, y: 0}
+  cameraTransform: {fileID: 799636895}
+  cameraFollower: {fileID: 254404703410713973}
+  speed: 10
+  beingDragged: 0
+--- !u!114 &254404703410713973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 254404703789701124, guid: f4ca4909e7bda974d91cf12ea08c05aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 254404703410713970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254404703410713971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e40943256ed18c41862d969ea830fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7015353492375699141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1852,10 +1900,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeeSwarm
       objectReference: {fileID: 0}
-    - target: {fileID: 7015353492510660789, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: cameraTransform
-      value: 
-      objectReference: {fileID: 799636895}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d1504dae6bc4a49be1291d87f2f57b, type: 3}

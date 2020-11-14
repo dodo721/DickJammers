@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(CharacterController))]
 public class BeeSwarm : MonoBehaviour
 {
 
@@ -17,6 +18,8 @@ public class BeeSwarm : MonoBehaviour
     public int numBees;
 
     public List<Clothes> clothes = new List<Clothes>();
+
+    public Transform cameraTarget;
 
     // Start is called before the first frame update
     void Start()

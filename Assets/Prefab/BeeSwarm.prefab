@@ -4823,7 +4823,6 @@ GameObject:
   - component: {fileID: 7015353492510660776}
   - component: {fileID: 7015353492510660783}
   - component: {fileID: 7015353492510660779}
-  - component: {fileID: 7015353492510660789}
   - component: {fileID: 7015353492510660777}
   - component: {fileID: 7015353492510660778}
   m_Layer: 0
@@ -4878,23 +4877,7 @@ MonoBehaviour:
   pushStrength: 5
   numBees: 100
   clothes: []
---- !u!114 &7015353492510660789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7015353492510660780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ed67190b149f8e499662662a37972c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePos: {x: 0, y: 0}
-  cameraTransform: {fileID: 0}
-  speed: 20
-  stopRadius: 0
-  beingDragged: 1
+  cameraTarget: {fileID: 7015353493106767614}
 --- !u!143 &7015353492510660777
 CharacterController:
   m_ObjectHideFlags: 0
