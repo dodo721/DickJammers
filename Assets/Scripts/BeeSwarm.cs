@@ -14,7 +14,7 @@ public class BeeSwarm : MonoBehaviour
     [Min(0)]
     public int numBees;
 
-    public Clothes[] clothes = new Clothes[3];
+    public List<Clothes> clothes = new List<Clothes>();
 
     // Start is called before the first frame update
     void Start()
@@ -41,17 +41,41 @@ public class BeeSwarm : MonoBehaviour
 
     public float Visibility () {
         // TODO: Fill in
-        return 1;
+        float clothesFactor = 1;
+
+        foreach (Clothes item in clothes){
+            clothesFactor *= item.GetVisibilityModifier();
+        }
+
+        return clothesFactor * Mathf.Pow(numBees, 2/3);
     }
 
     public float Noise () {
         // TODO: Fill in
-        return 1;
+        float clothesFactor = 1;
+
+        foreach (Clothes item in clothes){
+            clothesFactor *= item.GetNoiseModifier();
+        }
+
+        return clothesFactor * Mathf.Pow(numBees, 2/3);
     }
 
     public float Conspicuiosness (Enemy enemy) {
         // TODO: Fill in
-        return 1;
+        RaycastHit hit;
+        int valLOS = 0;
+
+        if(Physics.Raycast(enemy.transform.position, (transform.position - enemy.transform.position), out hit))
+        {
+            if(hit.transform == this)
+            {
+                valLOS = 1;
+            }
+        }
+
+        float distNoiseMod = (this.transform.position - enemy.transform.position).magnitude;
+        return (valLOS * Visibility()) + Noise();
     }
 
 
