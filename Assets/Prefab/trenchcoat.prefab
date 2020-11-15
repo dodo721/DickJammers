@@ -89,7 +89,9 @@ MonoBehaviour:
   bobMagnitude: 0.3
   bobFrequency: 1
   equipped: 0
-  toDisable: []
+  toDisable:
+  - {fileID: 406993046958902558}
+  - {fileID: 406993047909432607}
 --- !u!114 &406993047532881043
 MonoBehaviour:
   m_ObjectHideFlags: 0

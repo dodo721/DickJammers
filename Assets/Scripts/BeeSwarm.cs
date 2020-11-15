@@ -194,6 +194,8 @@ public class BeeSwarm : MonoBehaviour
 
     public void Hurt()
     {
+        if (HasClothes())
+            clothes.Drop();
         numBees--;
     }
 

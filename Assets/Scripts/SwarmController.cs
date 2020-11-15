@@ -39,6 +39,17 @@ public class SwarmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (controlling == null) {
+            if (BeeSwarm.allTheBees.Count > 0) {
+                int index = BeeSwarm.allTheBees.IndexOf(controlling);
+                index = (BeeSwarm.allTheBees.Count + index - 1) % BeeSwarm.allTheBees.Count;
+                SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
+            } else {
+                // TODO DEATH
+                return;
+            }
+        }
+
         if (controlling != null && controller == null) {
             controller = controlling.GetComponent<CharacterController>();
         }
