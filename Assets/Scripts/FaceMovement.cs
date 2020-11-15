@@ -18,7 +18,7 @@ public class FaceMovement : MonoBehaviour
     void Update()
     {
         if (controller != null) {
-            Vector3 lookat = transform.position + controller.velocity;
+            Vector3 lookat = transform.position + (controller.velocity * 10000);
             Quaternion lookRot = Quaternion.LookRotation(lookat, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
         }

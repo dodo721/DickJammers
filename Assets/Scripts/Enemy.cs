@@ -18,11 +18,14 @@ public class Enemy : MonoBehaviour
     public AlertExclamationMark indicator;
     public List<BeeSwarm> inVision = new List<BeeSwarm>();
 
+    public static List<Enemy> allTheEnemies = new List<Enemy>();
+
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         ogCountdown = countDown;
+        allTheEnemies.Add(this);
     }
 
     // Update is called once per frame
@@ -101,6 +104,9 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
-
+    public void Distract (Vector3 position) {
+        // TODO fill in properly
+        agent.SetDestination(position);
+    }
     
 }

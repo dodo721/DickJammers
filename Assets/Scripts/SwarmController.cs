@@ -17,6 +17,7 @@ public class SwarmController : MonoBehaviour
     private CharacterController controller;
     public static SwarmController i;
     public Rigidbody draggingObject;
+    public Vector3 direction;
 
     void Awake () {
         if (i == null) i = this;
@@ -79,7 +80,7 @@ public class SwarmController : MonoBehaviour
             controlling.BuildHive();
         }
 
-        Vector3 direction = new Vector3();
+        direction = new Vector3();
 
         if (Input.GetKey(KeyCode.W)) {
             direction += Vector3.forward;
@@ -97,6 +98,8 @@ public class SwarmController : MonoBehaviour
         direction.Normalize();
 
         Vector3 translationWorldSpace = direction * speed * Time.deltaTime;
+        if (controlling.HasClothes())
+            translationWorldSpace *= controlling.clothes.speedMod;
         Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
         controller.Move(translationCameraSpace);
 
