@@ -24,6 +24,8 @@ public class BeeSwarm : MonoBehaviour
     [Min(0)]
     public int numBees;
 
+    public float spawnSwarmDistance;
+
     public List<Clothes> clothes = new List<Clothes>();
 
     public Transform cameraTarget;
@@ -72,6 +74,44 @@ public class BeeSwarm : MonoBehaviour
     {
         if(numBees >= 400)
         {   
+            Vector3 newPosition = transform.position + (spawnSwarmDistance * SwarmController.i.getDirectionToMouse());
+
+            bool validSpawn = true;
+
+            foreach(BeeSwarm bees in allTheBees){
+                if((bees.transform.position - newPosition).magnitude < 2) validSpawn = false;
+            }
+
+            RaycastHit hit;
+            if(Physics.Raycast(newPosition, (transform.position - newPosition), out hit))
+            {
+                if(!(hit.transform == this.transform))
+                {
+                    validSpawn = false;
+                }
+            }
+
+            if(Physics.Raycast(transform.position, (newPosition - transform.position), out hit, spawnSwarmDistance))
+            {
+                validSpawn = false;
+            }
+
+            if(validSpawn){
+                BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
+                int newNumBees = numBees / 2;
+                numBees -= newNumBees;
+                spawnedBees.numBees = newNumBees;
+                spawnedBees.clothes = new List<Clothes>();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool BuildHive()
+    {
+        if(numBees >= 400)
+        {
             Vector3 newPosition = transform.position + (3* SwarmController.i.getDirectionToMouse());
 
             bool validSpawn = true;
@@ -144,21 +184,28 @@ public class BeeSwarm : MonoBehaviour
 
     // Add/remove pushing objects when they enter/leave range
     void OnTriggerEnter (Collider other) {
-        if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && !other.isTrigger)
-            inRange.Add(other.GetComponent<Rigidbody>());
-        else if (other.GetComponent<BeeSwarm>() != null)
+        
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, other.transform.position - transform.position, out hit))
         {
-            BeeSwarm component = other.GetComponent<BeeSwarm>();
-            if (other.gameObject != this.gameObject && this != SwarmController.i.GetControlledBeeSwarm())
-            {
-                component.numBees += numBees;
-                allTheBees.Remove(this);
-                Destroy(this.gameObject);
+            if (hit.collider == other) {
+                if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && !other.isTrigger)
+                    inRange.Add(other.GetComponent<Rigidbody>());
+                else if (other.GetComponent<BeeSwarm>() != null)
+                {
+                    BeeSwarm component = other.GetComponent<BeeSwarm>();
+                    if (other.gameObject != this.gameObject && this != SwarmController.i.GetControlledBeeSwarm())
+                    {
+                        component.numBees += numBees;
+                        allTheBees.Remove(this);
+                        Destroy(this.gameObject);
+                    }
+                }
+                else if (other.GetComponent<Enemy>() != null)
+                {
+                    numBees -= (numBees/10);
+                }
             }
-        }
-        else if (other.GetComponent<Enemy>() != null)
-        {
-            numBees -= (numBees/10);
         }
     }
 
@@ -184,6 +231,11 @@ public class BeeSwarm : MonoBehaviour
     {
         Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
         Gizmos.DrawSphere(transform.position, GetComponent<SphereCollider>().radius);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3.forward * spawnSwarmDistance));
+        Gizmos.color = new Color(0f, 0f, 1f, 0.3f);
+        Gizmos.DrawSphere(transform.position + (Vector3.forward * spawnSwarmDistance), GetComponent<SphereCollider>().radius);
+
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 5);
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 20);
         Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 45);
