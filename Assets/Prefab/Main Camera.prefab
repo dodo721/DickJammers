@@ -487,9 +487,11 @@ MonoBehaviour:
   dragStrength: 100
   draggingObject: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
-  previewHivePrefab: {fileID: 0}
-  previewBeesPrefab: {fileID: 0}
-  previewCoatPrefab: {fileID: 0}
+  previewHivePrefab: {fileID: 617110549, guid: 01be7376ada1a344fbff7cd3a44e16fd, type: 3}
+  previewBeesPrefab: {fileID: 2588074703007851186, guid: 35cb6d60727486244ace5bc98d97dc45,
+    type: 3}
+  previewCoatPrefab: {fileID: 1756937614, guid: dd3307f1c2a74614995a5089a7207cf1,
+    type: 3}
 --- !u!120 &1898226711
 LineRenderer:
   m_ObjectHideFlags: 0
