@@ -486,6 +486,7 @@ MonoBehaviour:
   speed: 10
   dragStrength: 100
   draggingObject: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
 --- !u!120 &1898226711
 LineRenderer:
   m_ObjectHideFlags: 0
