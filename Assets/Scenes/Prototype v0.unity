@@ -2778,6 +2778,7 @@ MonoBehaviour:
   alert: 0
   countDown: 0.5
   speed: 0
+  distractDist: 14.59
   targetedBees: {fileID: 0}
   noiseLevel: 0
   indicator: {fileID: 704021066}
@@ -6108,6 +6109,7 @@ MonoBehaviour:
   alert: 0
   countDown: 0.5
   speed: 0
+  distractDist: 14.59
   targetedBees: {fileID: 0}
   noiseLevel: 0
   indicator: {fileID: 55723362}

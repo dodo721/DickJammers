@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public float countDown;
     private float ogCountdown;
     public float speed;
+    public float distractDist;
     public BeeSwarm targetedBees;
     public float noiseLevel;
     private NavMeshAgent agent;
@@ -105,9 +106,20 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
-    public void Distract (Vector3 position) {
-        // TODO fill in properly
-        agent.SetDestination(position);
+    public void Distract (CollisionSounds obj) {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (obj.transform.position - transform.position), out hit)) {
+            if (hit.collider.GetComponent<CollisionSounds>() == obj) {
+                if (Vector3.Distance(obj.transform.position, transform.position) <= distractDist) {
+                    agent.SetDestination(obj.transform.position);
+                }
+            }
+        }
+    }
+
+    void OnDrawGizmos () {
+        UnityEngine.Gizmos.color = Color.red;
+        UnityEngine.Gizmos.DrawLine(transform.position, transform.position + (Vector3.forward * distractDist));
     }
     
 }

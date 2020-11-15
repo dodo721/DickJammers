@@ -35,7 +35,7 @@ public class CollisionSounds : MonoBehaviour
             AudioClip clip = sounds[Random.Range(0, sounds.Count)];
             source.PlayOneShot(clip);
             foreach (Enemy enemy in Enemy.allTheEnemies) {
-                enemy.Distract(transform.position);
+                enemy.Distract(this);
             }
         }
     }
