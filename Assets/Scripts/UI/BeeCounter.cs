@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BeeCounter : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class BeeCounter : MonoBehaviour
         foreach(BeeSwarm swarm in BeeSwarm.allTheBees)
         {
             locCounter += swarm.numBees;
+        }
+        if(locCounter == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         beeCounter = locCounter;
         tMesh.text = "Total Bees\n" + beeCounter.ToString();

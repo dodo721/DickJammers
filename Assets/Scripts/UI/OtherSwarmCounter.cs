@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class OtherSwarmCounter : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class OtherSwarmCounter : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButtonDown("R"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
         BeeSwarm currentSwarm = swarmCont.GetControlledBeeSwarm();
         if (GameObject.ReferenceEquals(lastSwarm, currentSwarm) == false)
         {
