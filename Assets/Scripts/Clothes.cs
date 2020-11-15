@@ -22,7 +22,9 @@ public class Clothes : Interactable
 
     protected override void Update () {
         base.Update();
-        transform.Translate(Vector3.down * Time.deltaTime * Mathf.Sin(Time.time * bobFrequency) * bobMagnitude);
+        if (hasInteracted) {
+            transform.Translate(Vector3.down * Time.deltaTime * Mathf.Sin(Time.time * bobFrequency) * bobMagnitude);
+        }
     }
 
     public float GetVisibilityModifier() {
@@ -42,7 +44,7 @@ public class Clothes : Interactable
     public override void UseInteractable(BeeSwarm bees)
     {
         if (!hasInteracted) {
-            bees.clothes.Add(this);
+            bees.clothes = this;
             transform.rotation = bees.transform.rotation;
             faceMovement.controller = bees.GetComponent<CharacterController>();
             faceMovement.enabled = true;

@@ -27,7 +27,7 @@ public class BeeSwarm : MonoBehaviour
 
     public float spawnSwarmDistance;
 
-    public List<Clothes> clothes = new List<Clothes>();
+    public Clothes clothes;
 
     public Transform cameraTarget;
     public float lockHeight;
@@ -101,8 +101,8 @@ public class BeeSwarm : MonoBehaviour
                 BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
                 int newNumBees = numBees / 2;
                 numBees -= newNumBees;
-                spawnedBees.numBees = newNumBees;
-                spawnedBees.clothes = new List<Clothes>();
+                spawnedBees.numBees = newNumBees; 
+                spawnedBees.clothes = null;
                 return true;
             }
         }
@@ -150,10 +150,8 @@ public class BeeSwarm : MonoBehaviour
         
         // TODO: Fill in
         float clothesFactor = 1;
-
-        foreach (Clothes item in clothes){
-            clothesFactor *= item.GetVisibilityModifier();
-        }
+        if (HasClothes())
+            clothesFactor *= clothes.GetVisibilityModifier();
 
         RaycastHit hit;
         int valLOS = 0;
@@ -173,9 +171,8 @@ public class BeeSwarm : MonoBehaviour
         // TODO: Fill in
         float clothesFactor = 1;
 
-        foreach (Clothes item in clothes){
-            clothesFactor *= item.GetNoiseModifier();
-        }
+        if (HasClothes())
+            clothesFactor *= clothes.GetNoiseModifier();
 
         float distNoiseMod = 1 / Mathf.Pow(((this.transform.position - enemy.transform.position).magnitude), 2f);
 
@@ -228,7 +225,7 @@ public class BeeSwarm : MonoBehaviour
     }
 
     public bool HasClothes () {
-        return clothes.Count > 0;
+        return clothes != null;
     }
 
     public static int GetNumUnusedBees () {
