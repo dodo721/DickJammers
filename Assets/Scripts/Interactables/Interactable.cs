@@ -63,10 +63,11 @@ public abstract class Interactable : MonoBehaviour
             }
             else canSelect = false;
 
+            BeeSwarm interactor = SwarmController.i.GetControlledBeeSwarm();
             // If we can select and are wanting to interact with the interactable...
-            if (canSelect && Input.GetButtonDown("Fire1"))
+            if (canSelect && Input.GetButtonDown("Fire1") && interactor.numBees >= beesRequired)
             {
-                UseInteractable(SwarmController.i.GetControlledBeeSwarm());
+                UseInteractable(interactor);
                 hasInteracted = true;
             }
         }

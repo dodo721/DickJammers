@@ -59,7 +59,7 @@ public class SwarmController : MonoBehaviour
                     onHive = true;
                 }
             }
-            if (!onHive) controlling.Split();
+            if (!onHive && !controlling.HasClothes()) controlling.Split();
         }
 
         if(Input.GetButtonDown("Q")){
@@ -76,6 +76,11 @@ public class SwarmController : MonoBehaviour
 
         if(Input.GetButtonDown("F")){
             controlling.BuildHive();
+        }
+
+        if(Input.GetButtonDown("Spacebar")){
+            if (controlling.HasClothes())
+                controlling.clothes.Drop();
         }
 
         direction = new Vector3();
@@ -100,6 +105,7 @@ public class SwarmController : MonoBehaviour
             translationWorldSpace *= controlling.clothes.speedMod;
         Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
         controller.Move(translationCameraSpace);
+        controller.Move(Vector3.down * (controller.transform.position.y - controlling.lockHeight));
 
         // DRAGGING
         if (Input.GetButtonDown("Fire1")) {

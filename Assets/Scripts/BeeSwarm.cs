@@ -204,10 +204,13 @@ public class BeeSwarm : MonoBehaviour
                     inRange.Add(other.GetComponent<Rigidbody>());
                 else if (other.GetComponent<BeeSwarm>() != null)
                 {
+                    // JOIN 2 SWARMS TOGETHER
                     BeeSwarm component = other.GetComponent<BeeSwarm>();
                     if (other.gameObject != this.gameObject && this != SwarmController.i.GetControlledBeeSwarm())
                     {
                         component.numBees += numBees;
+                        if (component.HasClothes())
+                            component.clothes.Drop();
                         allTheBees.Remove(this);
                         Destroy(this.gameObject);
                     }
