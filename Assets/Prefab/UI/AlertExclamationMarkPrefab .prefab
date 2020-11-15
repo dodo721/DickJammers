@@ -129,4 +129,4 @@ MonoBehaviour:
   adjust: 0
   sprite: {fileID: 8355743273786902879}
   rotateAngle: 30
-  rotSpeed: 0
+  rotSpeed: 250

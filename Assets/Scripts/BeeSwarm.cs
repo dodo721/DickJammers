@@ -179,7 +179,16 @@ public class BeeSwarm : MonoBehaviour
 
         float distNoiseMod = 1 / Mathf.Pow(((this.transform.position - enemy.transform.position).magnitude), 2f);
 
-        return distNoiseMod * noiseFactor * clothesFactor * numBees;
+        // Reduce by half when behind a wall
+        float coverNoiseMod = 1f;
+        RaycastHit hit;
+        if (Physics.Raycast(enemy.transform.position, transform.position - enemy.transform.position, out hit)) {
+            if (hit.transform != transform) {
+                coverNoiseMod = 0.5f;
+            }
+        }
+
+        return distNoiseMod * noiseFactor * clothesFactor * coverNoiseMod * numBees;
     }
 
     public float Conspicuiosness (Enemy enemy, float noiseFactor = .2f, float visFactor = .2f) {
@@ -194,7 +203,7 @@ public class BeeSwarm : MonoBehaviour
         if(Physics.Raycast(transform.position, other.transform.position - transform.position, out hit))
         {
             if (hit.collider == other) {
-                if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && !other.isTrigger)
+                if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && (!other.isTrigger || other.CompareTag("Hive")))
                     inRange.Add(other.GetComponent<Rigidbody>());
                 else if (other.GetComponent<BeeSwarm>() != null)
                 {

@@ -43430,7 +43430,9 @@ MonoBehaviour:
   beesUnclothed: {fileID: 7015353493991986111}
   beesClothed: {fileID: 540473427}
   newBees: {fileID: 7015353492510660780}
+  newHive: {fileID: 0}
   numBees: 1000
+  spawnSwarmDistance: 4.71
   clothes: []
   cameraTarget: {fileID: 7015353493106767614}
   lockHeight: 0
