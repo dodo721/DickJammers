@@ -11549,40 +11549,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7015353492510660778, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: numBees
-      value: 1100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015353492510660779, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: spawnSwarmDistance
-      value: 4.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7015353492510660780, guid: 80d1504dae6bc4a49be1291d87f2f57b,
         type: 3}
       propertyPath: m_Name
       value: BeeSwarm
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015353492510660783, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015353493780157845, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7015353493780157845, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d1504dae6bc4a49be1291d87f2f57b, type: 3}
@@ -11598,12 +11568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e3f72e78fa2d24a9219dc10c65e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &874399740 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7015353493106767614, guid: 80d1504dae6bc4a49be1291d87f2f57b,
-    type: 3}
-  m_PrefabInstance: {fileID: 874399738}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &884730865
 GameObject:
   m_ObjectHideFlags: 0
@@ -12693,11 +12657,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 254404703789701124, guid: f4ca4909e7bda974d91cf12ea08c05aa,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 874399740}
     - target: {fileID: 254404703789701126, guid: f4ca4909e7bda974d91cf12ea08c05aa,
         type: 3}
       propertyPath: m_RootOrder
@@ -12752,11 +12711,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 254404703789701127, guid: f4ca4909e7bda974d91cf12ea08c05aa,
-        type: 3}
-      propertyPath: m_Cameras.Array.data[0]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ca4909e7bda974d91cf12ea08c05aa, type: 3}
