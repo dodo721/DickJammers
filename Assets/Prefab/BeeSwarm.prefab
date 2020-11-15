@@ -43424,15 +43424,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e3f72e78fa2d24a9219dc10c65e3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inRange: []
   normalRadius: 1
   clothedRadius: 0.7
   beesUnclothed: {fileID: 7015353493991986111}
   beesClothed: {fileID: 540473427}
-  pushStrength: 5
   newBees: {fileID: 7015353492510660780}
   numBees: 1000
   clothes: []
   cameraTarget: {fileID: 7015353493106767614}
+  lockHeight: 0
   particles:
   - {fileID: 7015353493991986104}
   - {fileID: 7015353492424440736}
@@ -43449,8 +43450,8 @@ CharacterController:
   serializedVersion: 2
   m_Height: 0
   m_Radius: 0.67
-  m_SlopeLimit: 0
-  m_StepOffset: 0.3
+  m_SlopeLimit: 180
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -43526,8 +43527,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7015353493780157834}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.511, z: 0}
-  m_LocalScale: {x: 2, y: 0.1, z: 2}
+  m_LocalPosition: {x: 0, y: 0.029, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 7015353492510660776}
   m_RootOrder: 2
