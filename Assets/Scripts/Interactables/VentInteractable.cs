@@ -18,6 +18,8 @@ public class VentInteractable : Interactable
         BeeSwarm swarm = sCont.controlling;
         print(exitPoint.transform.position);
         CharacterController x = swarm.gameObject.GetComponent<CharacterController>();
+        x.enabled = false;
         swarm.gameObject.transform.position = exitPoint.position;
+        x.enabled = true;
     }
 }
