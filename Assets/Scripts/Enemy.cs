@@ -7,9 +7,9 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float obliviousness = 20;
+    public float obliviousness;
     public bool alert = false;
-    public float countDown = 1f;
+    public float countDown;
     private float ogCountdown;
     public float speed;
     public BeeSwarm targetedBees;
@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
             {
                 indicator.adjust = 1;
                 agent.SetDestination(targetedBees.transform.position);
+                if((targetedBees.transform.position - agent.transform.position).magnitude < 2.5f) targetedBees.Hurt();
             }
             //ToDo damage, pathfinding
         }

@@ -146,7 +146,7 @@ public class BeeSwarm : MonoBehaviour
         return false;
     }
 
-    public float Visibility (Enemy enemy, float visFactor = .4f) {
+    public float Visibility (Enemy enemy, float visFactor = 1f) {
         
         // TODO: Fill in
         float clothesFactor = 1;
@@ -167,7 +167,7 @@ public class BeeSwarm : MonoBehaviour
         return valLOS * visFactor * clothesFactor * Mathf.Pow(numBees, .5f);
     }
 
-    public float Noise (Enemy enemy, float noiseFactor = .2f) {
+    public float Noise (Enemy enemy, float noiseFactor = .5f) {
         // TODO: Fill in
         float clothesFactor = 1;
 
@@ -192,6 +192,10 @@ public class BeeSwarm : MonoBehaviour
         return Visibility(enemy, visFactor) + Noise(enemy, noiseFactor);
     }
 
+    public void Hurt()
+    {
+        numBees--;
+    }
 
     // Add/remove pushing objects when they enter/leave range
     void OnTriggerEnter (Collider other) {
@@ -201,7 +205,9 @@ public class BeeSwarm : MonoBehaviour
         {
             if (hit.collider == other) {
                 if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && (!other.isTrigger || other.CompareTag("Hive")))
+                {
                     inRange.Add(other.GetComponent<Rigidbody>());
+                }
                 else if (other.GetComponent<BeeSwarm>() != null)
                 {
                     BeeSwarm component = other.GetComponent<BeeSwarm>();
@@ -212,10 +218,7 @@ public class BeeSwarm : MonoBehaviour
                         Destroy(this.gameObject);
                     }
                 }
-                else if (other.GetComponent<Enemy>() != null)
-                {
-                    numBees -= (numBees/10);
-                }
+                
             }
         }
     }
