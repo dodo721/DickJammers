@@ -7,7 +7,6 @@ public class VentInteractable : Interactable
     public VentInteractable brotherVent;
     public Transform exitPoint;
     private SwarmController sCont;
-
     public void Start()
     {
         sCont = Camera.main.GetComponent<SwarmController>();
@@ -17,8 +16,8 @@ public class VentInteractable : Interactable
     {
         base.UseInteractable(bees);
         BeeSwarm swarm = sCont.controlling;
-        print("(" + swarm.gameObject.transform.position.ToString() + ") -> (" + brotherVent.exitPoint.position.ToString() + ")");
+        print(exitPoint.transform.position);
+        CharacterController x = swarm.gameObject.GetComponent<CharacterController>();
         swarm.gameObject.transform.position = exitPoint.position;
-        
     }
 }
