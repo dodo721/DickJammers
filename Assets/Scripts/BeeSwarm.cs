@@ -20,6 +20,7 @@ public class BeeSwarm : MonoBehaviour
     public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
 
     public GameObject newBees;
+    public GameObject newHive;
 
     [Min(0)]
     public int numBees;
@@ -111,8 +112,8 @@ public class BeeSwarm : MonoBehaviour
     public bool BuildHive()
     {
         if(numBees >= 400)
-        {
-            Vector3 newPosition = transform.position + (3* SwarmController.i.getDirectionToMouse());
+        {   
+            Vector3 newPosition = transform.position + (spawnSwarmDistance * SwarmController.i.getDirectionToMouse());
 
             bool validSpawn = true;
 
@@ -129,12 +130,16 @@ public class BeeSwarm : MonoBehaviour
                 }
             }
 
+            if(Physics.Raycast(transform.position, (newPosition - transform.position), out hit, spawnSwarmDistance))
+            {
+                validSpawn = false;
+            }
+
             if(validSpawn){
-                BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
+                Hive spawnedHive = Instantiate(newHive, newPosition, newHive.transform.rotation).GetComponent<Hive>();
                 int newNumBees = numBees / 2;
                 numBees -= newNumBees;
-                spawnedBees.numBees = newNumBees;
-                spawnedBees.clothes = new List<Clothes>();
+                spawnedHive.numBees = newNumBees;
                 return true;
             }
         }

@@ -31,10 +31,13 @@ public class Hive : MonoBehaviour
         }
     }
 
-    public void Die () {
+    public void Die (BeeSwarm killer) {
+        Debug.Log("Destroying!");
         if (destroyedHive != null) {
+            Debug.Log("Adding broken hive!");
             Instantiate(destroyedHive, transform.position, destroyedHive.transform.rotation);
         }
+        killer.numBees += numBees;
         Destroy(gameObject);
     }
 }

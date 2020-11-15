@@ -56,7 +56,7 @@ public class SwarmController : MonoBehaviour
                 {
                     Debug.Log("Hive!!!");
                     Hive hive = hit.collider.GetComponent<Hive>();
-                    hive.Die();
+                    hive.Die(controlling);
                     onHive = true;
                 }
             }
@@ -76,7 +76,7 @@ public class SwarmController : MonoBehaviour
         }
 
         if(Input.GetButtonDown("F")){
-            
+            controlling.BuildHive();
         }
 
         Vector3 direction = new Vector3();
