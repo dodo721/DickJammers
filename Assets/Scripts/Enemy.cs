@@ -67,8 +67,15 @@ public class Enemy : MonoBehaviour
         BeeSwarm mostConspicBee = null;
         foreach(BeeSwarm bees in BeeSwarm.allTheBees){
 
-            noiseLevel += bees.Noise(this);
-            float tempConspic = bees.Conspicuiosness(this);
+            float tempVis = 0;
+
+            if(inVision.Contains(bees)) tempVis = bees.Visibility(this);
+
+            float tempNoise = bees.Noise(this);
+            
+            noiseLevel += tempNoise;
+
+            float tempConspic = tempVis + tempNoise;
 
             if (tempConspic > maxConspicuousness)
             {

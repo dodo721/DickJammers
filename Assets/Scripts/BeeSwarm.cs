@@ -146,7 +146,7 @@ public class BeeSwarm : MonoBehaviour
         return false;
     }
 
-    public float Visibility (Enemy enemy, float visFactor = .2f) {
+    public float Visibility (Enemy enemy, float visFactor = .f) {
         
         // TODO: Fill in
         float clothesFactor = 1;
@@ -191,7 +191,7 @@ public class BeeSwarm : MonoBehaviour
         return distNoiseMod * noiseFactor * clothesFactor * coverNoiseMod * numBees;
     }
 
-    public float Conspicuiosness (Enemy enemy, float noiseFactor = .2f, float visFactor = .2f) {
+    public float Conspicuiosness (Enemy enemy, float noiseFactor = .2f, float visFactor = .4f) {
         return Visibility(enemy, visFactor) + Noise(enemy, noiseFactor);
     }
 
