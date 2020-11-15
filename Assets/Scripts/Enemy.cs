@@ -64,27 +64,34 @@ public class Enemy : MonoBehaviour
     {
         noiseLevel = 0;
         float maxConspicuousness = 0f;
-        BeeSwarm toReturn = null;
+        BeeSwarm mostConspicBee = null;
         foreach(BeeSwarm bees in BeeSwarm.allTheBees){
 
             noiseLevel += bees.Noise(this);
-            float conspic = bees.Conspicuiosness(this);
-            if (conspic > maxConspicuousness) maxConspicuousness = conspic;
-            if(conspic > obliviousness || (alert && bees.Conspicuiosness(this) > obliviousness * 2/3))
+            float tempConspic = bees.Conspicuiosness(this);
+
+            if (tempConspic > maxConspicuousness)
             {
-                alert = true;
-                toReturn = bees;
-            }
+                mostConspicBee = bees;
+                maxConspicuousness = tempConspic;
+            } 
+
         }
 
-        if (!alert) {
-            if(noiseLevel > obliviousness) alert = true;
-            else alert = false;
+        if(noiseLevel > obliviousness) alert = true;
+        else alert = false;
+
+        if(alert)
+        {
+            indicator.adjust = Mathf.Clamp(maxConspicuousness / (obliviousness * .7f), 0f, 1f);
+            if(maxConspicuousness > obliviousness * .7f) return mostConspicBee;
+        } 
+        else 
+        {
+            indicator.adjust = Mathf.Clamp(maxConspicuousness / obliviousness, 0f, 1f);
+            if(maxConspicuousness > obliviousness) return mostConspicBee;
         }
-
-        indicator.adjust = Mathf.Clamp(maxConspicuousness / obliviousness, 0f, 1f);
-
-        return toReturn;
+        return null;
     }
 
 
