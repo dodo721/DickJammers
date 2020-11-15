@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ExitVent : MonoBehaviour
+
+public class ExitVent : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override void UseInteractable(BeeSwarm bees)
 
-    // Update is called once per frame
-    void Update()
     {
-        
+        SceneManager.LoadScene("Main Menu");
     }
 }

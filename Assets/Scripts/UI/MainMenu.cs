@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenu : Interactable
+public class MainMenu : MonoBehaviour
 {
-    public override void UseInteractable(BeeSwarm bees)
+    public void select (string scen)
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene(scen);
     }
 }
