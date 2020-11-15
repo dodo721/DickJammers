@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public float noiseLevel;
     private NavMeshAgent agent;
     public AlertExclamationMark indicator;
+    public List<BeeSwarm> inVision = new List<BeeSwarm>();
 
 
     void Start()
@@ -43,6 +44,19 @@ public class Enemy : MonoBehaviour
         {
             countDown = ogCountdown;
             //ToDo normal behavior
+        }
+    }
+
+    void OnTriggerEnter (Collider other) {
+        if (other.CompareTag("Player")) {
+            if (!inVision.Contains(other.GetComponent<BeeSwarm>()))
+                inVision.Add(other.GetComponent<BeeSwarm>());
+        }
+    }
+
+    void OnTriggerExit (Collider other) {
+        if (other.CompareTag("Player")) {
+            inVision.Remove(other.GetComponent<BeeSwarm>());
         }
     }
 
