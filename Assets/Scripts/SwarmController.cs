@@ -18,6 +18,12 @@ public class SwarmController : MonoBehaviour
     public static SwarmController i;
     public Rigidbody draggingObject;
     public Vector3 direction;
+    public Preview previewHivePrefab;
+    public Preview previewBeesPrefab;
+    public Preview previewCoatPrefab;
+    private Preview previewHive = null;
+    private Preview previewBees = null;
+    private Preview previewCoat = null;
 
     void Awake () {
         if (i == null) i = this;
@@ -54,7 +60,16 @@ public class SwarmController : MonoBehaviour
             controller = controlling.GetComponent<CharacterController>();
         }
 
-        if(Input.GetButtonDown("Fire2")) {
+        if (Input.GetMouseButton(1)) {
+            Vector3 newPos;
+            bool valid = CanBePlacedAt(out newPos);
+            if (previewBees == null) {
+                previewBees = Instantiate(previewBeesPrefab, newPos, previewBeesPrefab.transform.rotation).GetComponent<Preview>();
+            }
+            previewBees.transform.position = newPos;
+            previewBees.valid = valid;
+        }
+        if(Input.GetButtonUp("Fire2")) {
             // If over hive, destroy it
             bool onHive = false;
             RaycastHit hit;
@@ -71,6 +86,9 @@ public class SwarmController : MonoBehaviour
                 }
             }
             if (!onHive && !controlling.HasClothes()) controlling.Split();
+            if (previewBees != null) {
+                Destroy(previewBees.gameObject);
+            }
         }
 
         if(Input.GetButtonDown("Q")){
@@ -85,13 +103,37 @@ public class SwarmController : MonoBehaviour
             SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
         }
 
-        if(Input.GetButtonDown("F")){
+        if (Input.GetKey(KeyCode.F)) {
+            Vector3 newPos;
+            bool valid = CanBePlacedAt(out newPos);
+            if (previewHive == null) {
+                previewHive = Instantiate(previewHivePrefab, newPos, previewHivePrefab.transform.rotation).GetComponent<Preview>();
+            }
+            previewHive.transform.position = newPos;
+            previewHive.valid = valid;
+        }
+        if(Input.GetButtonUp("F")){
             controlling.BuildHive();
+            if (previewHive != null) {
+                Destroy(previewHive.gameObject);
+            }
         }
 
-        if(Input.GetButtonDown("Spacebar")){
+        if (Input.GetKey(KeyCode.Space) && controlling.HasClothes()) {
+            Vector3 newPos;
+            bool valid = CanBePlacedAt(out newPos);
+            if (previewCoat == null) {
+                previewCoat = Instantiate(previewCoatPrefab, newPos, previewCoatPrefab.transform.rotation).GetComponent<Preview>();
+            }
+            previewCoat.transform.position = newPos;
+            previewCoat.valid = valid;
+        }
+        if(Input.GetButtonUp("Spacebar")){
             if (controlling.HasClothes())
                 controlling.clothes.Drop();
+            if (previewCoat != null) {
+                Destroy(previewCoat.gameObject);
+            }
         }
 
         direction = new Vector3();
@@ -168,6 +210,33 @@ public class SwarmController : MonoBehaviour
         } else {
             lineRenderer.enabled = false;
         }
+    }
+
+    public bool CanBePlacedAt (out Vector3 pos) {
+        Vector3 newPosition = controlling.transform.position + (controlling.spawnSwarmDistance * getDirectionToMouse());
+
+        bool validSpawn = true;
+
+        foreach(BeeSwarm bees in BeeSwarm.allTheBees){
+            if((bees.transform.position - newPosition).magnitude < 2) validSpawn = false;
+        }
+
+        RaycastHit hit;
+        if(Physics.Raycast(newPosition, (controlling.transform.position - newPosition), out hit))
+        {
+            if(!(hit.transform == controlling.transform))
+            {
+                validSpawn = false;
+            }
+        }
+
+        if(Physics.Raycast(controlling.transform.position, (newPosition - controlling.transform.position), out hit, controlling.spawnSwarmDistance))
+        {
+            validSpawn = false;
+        }
+
+        pos = newPosition;
+        return validSpawn;
     }
 
     public BeeSwarm GetControlledBeeSwarm () {

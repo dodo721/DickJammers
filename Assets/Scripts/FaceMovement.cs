@@ -18,7 +18,10 @@ public class FaceMovement : MonoBehaviour
     void Update()
     {
         if (controller != null) {
-            Vector3 lookat = transform.position + (controller.velocity.normalized * 10000);
+            Vector3 lookat = Vector3.forward;
+            if (SwarmController.i.GetControlledBeeSwarm() == controller.GetComponent<BeeSwarm>()) {
+                lookat = SwarmController.i.direction * 10000;
+            }
             Quaternion lookRot = Quaternion.LookRotation(lookat, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
         }
