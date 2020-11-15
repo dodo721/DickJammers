@@ -46,7 +46,7 @@ public class SwarmController : MonoBehaviour
             // If over hive, destroy it
             bool onHive = false;
             RaycastHit hit;
-            int layerMask = 1 << 8;
+            int layerMask = (1 << 8) | (1 << 2);
             layerMask = ~layerMask; // All except bees
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
@@ -99,12 +99,13 @@ public class SwarmController : MonoBehaviour
         Vector3 translationWorldSpace = direction * speed * Time.deltaTime;
         Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
         controller.Move(translationCameraSpace);
+        controller.Move(Vector3.down * (controller.transform.position.y - controlling.lockHeight));
 
         // DRAGGING
         if (Input.GetButtonDown("Fire1")) {
             // Check if the mouse is over any in range objects
             RaycastHit hit;
-            int layerMask = 1 << 8;
+            int layerMask = (1 << 8) | (1 << 2);
             layerMask = ~layerMask; // All except bees
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))

@@ -26,7 +26,7 @@ public abstract class Interactable : MonoBehaviour
         // Do later
     }
 
-    void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
 
         if (other.gameObject.tag == "Player")
@@ -36,7 +36,7 @@ public abstract class Interactable : MonoBehaviour
 
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         canInteract = false;
         canSelect = false;
@@ -50,7 +50,9 @@ public abstract class Interactable : MonoBehaviour
             // Check to see if the mouse is over the interactable
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            int layerMask = (1 << 8) | (1 << 2);
+            layerMask = ~layerMask;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.rigidbody != null)
                 {

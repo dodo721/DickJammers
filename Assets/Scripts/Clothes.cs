@@ -41,6 +41,7 @@ public class Clothes : Interactable
 
     public override void UseInteractable(BeeSwarm bees)
     {
+        if (bees.numBees < beesRequired) return;
         if (!hasInteracted) {
             bees.clothes.Add(this);
             transform.rotation = bees.transform.rotation;

@@ -24,6 +24,7 @@ public class DoubleButtonInteractable : Interactable
     public override void UseInteractable(BeeSwarm bees)
     {
         base.UseInteractable(bees);
+        if (bees.numBees < beesRequired) return;
         if (brotherButton.pressed)
         {
             GameObject.Destroy(lockedDoor);

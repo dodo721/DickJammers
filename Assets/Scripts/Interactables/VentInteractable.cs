@@ -15,6 +15,7 @@ public class VentInteractable : Interactable
     public override void UseInteractable(BeeSwarm bees)
     {
         base.UseInteractable(bees);
+        if (bees.numBees < beesRequired) return;
         BeeSwarm swarm = sCont.controlling;
         print(exitPoint.transform.position);
         CharacterController x = swarm.gameObject.GetComponent<CharacterController>();

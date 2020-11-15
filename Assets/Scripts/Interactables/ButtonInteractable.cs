@@ -12,6 +12,7 @@ public class ButtonInteractable : Interactable
 
     {
         base.UseInteractable(bees);
+        if (bees.numBees < beesRequired) return;
         GetComponent<Renderer>().material = AfterInteractColour;
         GameObject.Destroy(LockedDoor);
     }

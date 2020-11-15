@@ -18,6 +18,11 @@ public class MovingPlatform : MonoBehaviour
         newPos +=  changeInPos;
     }
 
+    public void setState(bool s)
+    {
+        state = s;
+    }
+
     public void toggleState()
     {
         state = !state;
@@ -28,11 +33,11 @@ public class MovingPlatform : MonoBehaviour
         x = defaultPos;
         if (state == false)
         {
-            this.transform.position = Vector3.Lerp(this.transform.position, defaultPos, Time.deltaTime);
+            this.transform.position = Vector3.Lerp(this.transform.position, defaultPos, 2 * Time.deltaTime);
         }
         else
         {
-            this.transform.position = Vector3.Lerp(this.transform.position, newPos, Time.deltaTime);
+            this.transform.position = Vector3.Lerp(this.transform.position, newPos, 2 * Time.deltaTime);
         }
     }
 
