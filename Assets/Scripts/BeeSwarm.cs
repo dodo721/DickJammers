@@ -146,7 +146,7 @@ public class BeeSwarm : MonoBehaviour
         return false;
     }
 
-    public float Visibility (Enemy enemy, float visFactor = .f) {
+    public float Visibility (Enemy enemy, float visFactor = .4f) {
         
         // TODO: Fill in
         float clothesFactor = 1;
