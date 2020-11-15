@@ -50,7 +50,9 @@ public abstract class Interactable : MonoBehaviour
             // Check to see if the mouse is over the interactable
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
+            int layerMask = (1 << 8 | 1 << 2);
+            layerMask = ~layerMask;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.rigidbody != null)
                 {
@@ -61,10 +63,11 @@ public abstract class Interactable : MonoBehaviour
             }
             else canSelect = false;
 
+            BeeSwarm interactor = SwarmController.i.GetControlledBeeSwarm();
             // If we can select and are wanting to interact with the interactable...
-            if (canSelect && Input.GetButtonDown("Fire1"))
+            if (canSelect && Input.GetButtonDown("Fire1") && interactor.numBees >= beesRequired)
             {
-                UseInteractable(SwarmController.i.GetControlledBeeSwarm());
+                UseInteractable(interactor);
                 hasInteracted = true;
             }
         }

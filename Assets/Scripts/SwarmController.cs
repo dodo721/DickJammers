@@ -47,21 +47,19 @@ public class SwarmController : MonoBehaviour
             // If over hive, destroy it
             bool onHive = false;
             RaycastHit hit;
-            int layerMask = 1 << 8;
+            int layerMask = (1 << 8) | (1 << 2);
             layerMask = ~layerMask; // All except bees
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                Debug.Log("Hit " + hit.collider.name);
                 if (hit.collider.CompareTag("Hive") && hit.rigidbody != null && controlling.inRange.Contains(hit.rigidbody))
                 {
-                    Debug.Log("Hive!!!");
                     Hive hive = hit.collider.GetComponent<Hive>();
                     hive.Die(controlling);
                     onHive = true;
                 }
             }
-            if (!onHive) controlling.Split();
+            if (!onHive && !controlling.HasClothes()) controlling.Split();
         }
 
         if(Input.GetButtonDown("Q")){
@@ -78,6 +76,11 @@ public class SwarmController : MonoBehaviour
 
         if(Input.GetButtonDown("F")){
             controlling.BuildHive();
+        }
+
+        if(Input.GetButtonDown("Spacebar")){
+            if (controlling.HasClothes())
+                controlling.clothes.Drop();
         }
 
         direction = new Vector3();
@@ -102,12 +105,13 @@ public class SwarmController : MonoBehaviour
             translationWorldSpace *= controlling.clothes.speedMod;
         Vector3 translationCameraSpace = cameraTransform.TransformDirection(translationWorldSpace);
         controller.Move(translationCameraSpace);
+        controller.Move(Vector3.down * (controller.transform.position.y - controlling.lockHeight));
 
         // DRAGGING
         if (Input.GetButtonDown("Fire1")) {
             // Check if the mouse is over any in range objects
             RaycastHit hit;
-            int layerMask = 1 << 8;
+            int layerMask = (1 << 8) | (1 << 2);
             layerMask = ~layerMask; // All except bees
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
