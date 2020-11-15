@@ -317,6 +317,7 @@ public class ParticleSounds : MonoBehaviour
         if (prefabAudioSource == null) {
             GameObject obj = new GameObject("Default ParticleSounds AudioSource");
             obj.transform.parent = transform;
+            obj.transform.localPosition = Vector3.zero;
             audioSource = obj.AddComponent<AudioSource>();
             audioSource.spatialBlend = use3DSound ? 1 : 0;
         } else {

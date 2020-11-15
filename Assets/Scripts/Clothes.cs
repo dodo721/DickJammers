@@ -59,6 +59,7 @@ public class Clothes : Interactable
             foreach (Collider collider in toDisable) {
                 collider.enabled = false;
             }
+            gameObject.layer = 2;
         }
     }
 
@@ -66,27 +67,8 @@ public class Clothes : Interactable
     {
         if(equipped)
         {   
-            Vector3 newPosition = transform.position + (wornBy.spawnSwarmDistance * SwarmController.i.getDirectionToMouse());
-
-            bool validSpawn = true;
-
-            foreach(BeeSwarm bees in BeeSwarm.allTheBees){
-                if((bees.transform.position - newPosition).magnitude < 2) validSpawn = false;
-            }
-
-            RaycastHit hit;
-            if(Physics.Raycast(newPosition, (transform.position - newPosition), out hit))
-            {
-                if(!(hit.transform == this.transform))
-                {
-                    validSpawn = false;
-                }
-            }
-
-            if(Physics.Raycast(transform.position, (newPosition - transform.position), out hit, wornBy.spawnSwarmDistance))
-            {
-                validSpawn = false;
-            }
+            Vector3 newPosition;
+            bool validSpawn = SwarmController.i.CanBePlacedAt(out newPosition);
 
             if(validSpawn){
                 wornBy.clothes = null;
@@ -99,6 +81,7 @@ public class Clothes : Interactable
                 foreach (Collider collider in toDisable) {
                     collider.enabled = true;
                 }
+                gameObject.layer = 9;
                 return true;
             }
         }
