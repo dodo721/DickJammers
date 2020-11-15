@@ -6,6 +6,9 @@ TagManager:
   tags:
   - 'Interactable '
   - Hive
+  - Blue Crate
+  - Green Crate
+  - Red Crate
   layers:
   - Default
   - TransparentFX
