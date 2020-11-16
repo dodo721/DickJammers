@@ -74,27 +74,9 @@ public class BeeSwarm : MonoBehaviour
     {
         if(numBees >= 400)
         {   
-            Vector3 newPosition = transform.position + (spawnSwarmDistance * SwarmController.i.getDirectionToMouse());
+            Vector3 newPosition;
 
-            bool validSpawn = true;
-
-            foreach(BeeSwarm bees in allTheBees){
-                if((bees.transform.position - newPosition).magnitude < 2) validSpawn = false;
-            }
-
-            RaycastHit hit;
-            if(Physics.Raycast(newPosition, (transform.position - newPosition), out hit))
-            {
-                if(!(hit.transform == this.transform))
-                {
-                    validSpawn = false;
-                }
-            }
-
-            if(Physics.Raycast(transform.position, (newPosition - transform.position), out hit, spawnSwarmDistance))
-            {
-                validSpawn = false;
-            }
+            bool validSpawn = SwarmController.i.CanBePlacedAt(out newPosition);
 
             if(validSpawn){
                 BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
@@ -112,27 +94,9 @@ public class BeeSwarm : MonoBehaviour
     {
         if(numBees >= 400)
         {   
-            Vector3 newPosition = transform.position + (spawnSwarmDistance * SwarmController.i.getDirectionToMouse());
+            Vector3 newPosition;
 
-            bool validSpawn = true;
-
-            foreach(BeeSwarm bees in allTheBees){
-                if((bees.transform.position - newPosition).magnitude < 2) validSpawn = false;
-            }
-
-            RaycastHit hit;
-            if(Physics.Raycast(newPosition, (transform.position - newPosition), out hit))
-            {
-                if(!(hit.transform == this.transform))
-                {
-                    validSpawn = false;
-                }
-            }
-
-            if(Physics.Raycast(transform.position, (newPosition - transform.position), out hit, spawnSwarmDistance))
-            {
-                validSpawn = false;
-            }
+            bool validSpawn = SwarmController.i.CanBePlacedAt(out newPosition);
 
             if(validSpawn){
                 Hive spawnedHive = Instantiate(newHive, newPosition, newHive.transform.rotation).GetComponent<Hive>();
