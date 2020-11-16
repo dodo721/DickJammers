@@ -1,5 +1,7 @@
 # DickJammers
 
+Created for the Mix-and-Jam Game Jam 2020: https://margeret.itch.io/plan-bee
+
 ## Project Structure
 
 * Animations - for Unity animations and animation controllers
