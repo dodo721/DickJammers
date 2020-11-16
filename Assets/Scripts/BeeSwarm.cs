@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -244,27 +243,6 @@ public class BeeSwarm : MonoBehaviour
             }
         }
         return sum;
-    }
-
-    void OnDrawGizmos ()
-    {
-        Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
-        Gizmos.DrawSphere(transform.position, GetComponent<SphereCollider>().radius);
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position, transform.position + (Vector3.forward * spawnSwarmDistance));
-        Gizmos.color = new Color(0f, 0f, 1f, 0.3f);
-        Gizmos.DrawSphere(transform.position + (Vector3.forward * spawnSwarmDistance), GetComponent<SphereCollider>().radius);
-
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 5);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 20);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 45);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 80);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 125);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 180);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 245);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 320);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 405);
-        Handles.DrawWireDisc(transform.position, Vector3.up, numBees / 500);
     }
 
 
