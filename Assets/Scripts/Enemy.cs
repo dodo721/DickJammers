@@ -19,14 +19,11 @@ public class Enemy : MonoBehaviour
     public AlertExclamationMark indicator;
     public List<BeeSwarm> inVision = new List<BeeSwarm>();
 
-    public static List<Enemy> allTheEnemies = new List<Enemy>();
-
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         ogCountdown = countDown;
-        allTheEnemies.Add(this);
     }
 
     // Update is called once per frame
@@ -70,7 +67,7 @@ public class Enemy : MonoBehaviour
         noiseLevel = 0;
         float maxConspicuousness = 0f;
         BeeSwarm mostConspicBee = null;
-        foreach(BeeSwarm bees in BeeSwarm.allTheBees){
+        foreach(BeeSwarm bees in FindObjectsOfType<BeeSwarm>()){
 
             float tempVis = 0;
 

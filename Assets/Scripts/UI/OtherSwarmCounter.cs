@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -33,7 +34,7 @@ public class OtherSwarmCounter : MonoBehaviour
                 GameObject.Destroy(obj);
             }
 
-            List<BeeSwarm> otherSwarms = BeeSwarm.allTheBees;
+            List<BeeSwarm> otherSwarms = FindObjectsOfType<BeeSwarm>().ToList();
             if (otherSwarms.Count == 1) return;
             otherSwarms.Remove(currentSwarm);
 

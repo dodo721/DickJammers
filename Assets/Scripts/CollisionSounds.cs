@@ -34,7 +34,7 @@ public class CollisionSounds : MonoBehaviour
         if (makeNoise) {
             AudioClip clip = sounds[Random.Range(0, sounds.Count)];
             source.PlayOneShot(clip);
-            foreach (Enemy enemy in Enemy.allTheEnemies) {
+            foreach (Enemy enemy in FindObjectsOfType<Enemy>()) {
                 enemy.Distract(this);
             }
         }

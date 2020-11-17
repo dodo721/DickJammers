@@ -23,7 +23,7 @@ public class IconFadeDistance : MonoBehaviour
     {
         float minDist = 1000;
 
-        foreach (BeeSwarm bee in BeeSwarm.allTheBees)
+        foreach (BeeSwarm bee in FindObjectsOfType<BeeSwarm>())
         {
             Transform t = bee.gameObject.transform;
             Vector2 swarmPos = new Vector2 (t.transform.position.x, t.transform.position.z);

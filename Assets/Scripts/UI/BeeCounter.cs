@@ -21,7 +21,7 @@ public class BeeCounter : MonoBehaviour
     private void Update()
     {
         int locCounter = 0;
-        foreach(BeeSwarm swarm in BeeSwarm.allTheBees)
+        foreach(BeeSwarm swarm in FindObjectsOfType<BeeSwarm>())
         {
             locCounter += swarm.numBees;
         }

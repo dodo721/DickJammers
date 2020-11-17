@@ -1,13 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Countdown : MonoBehaviour
+public class InteractableAlert : MonoBehaviour
 {
     public GameObject countdownText;
-    public float timerVal;
     private TextMeshPro tMesh;
+    private float timeLeft;
     private float newScale;
     private float shrinkRate;
     private bool ready;
@@ -15,35 +15,40 @@ public class Countdown : MonoBehaviour
     void Start()
     {
         tMesh = countdownText.GetComponent<TextMeshPro>();
+        tMesh.text = "";
+        gameObject.SetActive(false);
     }
 
-    public void passParam(float timerVal)
+    public void Alert(string text, float time)
     {
-        this.timerVal = timerVal;
+        Debug.Log("ALERTING " + text + " FOR " + time + " SECONDS");
+        tMesh.text = text;
+        timeLeft = time;
         newScale = 1f;
         shrinkRate = 0.2f;
         ready = true;
+        gameObject.SetActive(true);
     }
 
     void Update()
     {
         if (ready)
         {
-            if (timerVal <= 0)
+            if (timeLeft <= 0)
             {
                 newScale -= shrinkRate * Time.deltaTime;
                 float tScale = newScale * gameObject.transform.localScale.x;
                 gameObject.transform.localScale = new Vector3(tScale, tScale, 1);
-                if (gameObject.transform.localScale.x < 0.1) GameObject.Destroy(gameObject);
+                if (gameObject.transform.localScale.x < 0.1) {
+                    gameObject.transform.localScale = new Vector3(1f,1f,1f);
+                    ready = false;
+                    tMesh.text = "";
+                    gameObject.SetActive(false);
+                }
             }
             else
             {
-                timerVal -= Time.deltaTime;
-                tMesh.text = (Mathf.Round(timerVal * 10f) / 10f).ToString();
-                // Add trailing 0 for round numbers
-                if (tMesh.text.Split('.').Length < 2) {
-                    tMesh.text += ".0";
-                }
+                timeLeft -= Time.deltaTime;
             }
         }
     }

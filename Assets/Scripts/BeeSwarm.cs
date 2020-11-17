@@ -16,8 +16,6 @@ public class BeeSwarm : MonoBehaviour
     public GameObject beesClothed;
     bool wereBeesClothedLastFrame = false;
 
-    public static List<BeeSwarm> allTheBees = new List<BeeSwarm>();
-
     public GameObject newBees;
     public GameObject newHive;
 
@@ -36,7 +34,6 @@ public class BeeSwarm : MonoBehaviour
     void Start()
     {
         sphereCollider = GetComponent<SphereCollider>();
-        allTheBees.Add(this);
         SwarmController.i.SetControlledBeeSwarm(this);
         lockHeight = transform.position.y;
     }
@@ -65,7 +62,6 @@ public class BeeSwarm : MonoBehaviour
 
         if(numBees < 100)
         {
-            allTheBees.Remove(this);
             Destroy(this.gameObject);
         }
     }
@@ -182,7 +178,6 @@ public class BeeSwarm : MonoBehaviour
                         component.numBees += numBees;
                         if (component.HasClothes())
                             component.clothes.Drop();
-                        allTheBees.Remove(this);
                         Destroy(this.gameObject);
                     }
                 }
@@ -201,7 +196,7 @@ public class BeeSwarm : MonoBehaviour
 
     public static int GetNumUnusedBees () {
         int sum = 0;
-        foreach (BeeSwarm bees in allTheBees) {
+        foreach (BeeSwarm bees in FindObjectsOfType<BeeSwarm>()) {
             if (!bees.HasClothes()) {
                 sum += bees.numBees;
             }

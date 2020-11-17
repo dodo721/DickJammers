@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(CameraFollower))]
@@ -45,11 +46,14 @@ public class SwarmController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        List<BeeSwarm> allTheBees = FindObjectsOfType<BeeSwarm>().ToList();
+
         if (controlling == null) {
-            if (BeeSwarm.allTheBees.Count > 0) {
-                int index = BeeSwarm.allTheBees.IndexOf(controlling);
-                index = (BeeSwarm.allTheBees.Count + index - 1) % BeeSwarm.allTheBees.Count;
-                SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
+            if (allTheBees.Count > 0) {
+                int index = allTheBees.IndexOf(controlling);
+                index = (allTheBees.Count + index - 1) % allTheBees.Count;
+                SetControlledBeeSwarm(allTheBees[index]);
             } else {
                 // TODO DEATH
                 return;
@@ -92,15 +96,15 @@ public class SwarmController : MonoBehaviour
         }
 
         if(Input.GetButtonDown("Q")){
-            int index = BeeSwarm.allTheBees.IndexOf(controlling);
-            index = (BeeSwarm.allTheBees.Count + index - 1) % BeeSwarm.allTheBees.Count;
-            SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
+            int index = allTheBees.IndexOf(controlling);
+            index = (allTheBees.Count + index - 1) % allTheBees.Count;
+            SetControlledBeeSwarm(allTheBees[index]);
         }
 
         if(Input.GetButtonDown("E")){
-            int index = BeeSwarm.allTheBees.IndexOf(controlling);
-            index = (index + 1) % BeeSwarm.allTheBees.Count;
-            SetControlledBeeSwarm(BeeSwarm.allTheBees[index]);
+            int index = allTheBees.IndexOf(controlling);
+            index = (index + 1) % allTheBees.Count;
+            SetControlledBeeSwarm(allTheBees[index]);
         }
 
         if (Input.GetKey(KeyCode.F)) {
@@ -217,7 +221,7 @@ public class SwarmController : MonoBehaviour
 
         bool validSpawn = true;
 
-        foreach(BeeSwarm bees in BeeSwarm.allTheBees){
+        foreach(BeeSwarm bees in FindObjectsOfType<BeeSwarm>()){
             if((bees.transform.position - newPosition).magnitude < 2) validSpawn = false;
         }
 
