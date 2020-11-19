@@ -5,18 +5,20 @@ using TMPro;
 
 public class InteractableAlert : MonoBehaviour
 {
-    public GameObject countdownText;
-    private TextMeshPro tMesh;
+    public TextMeshProUGUI tMesh;
+    private RectTransform rectTransform;
     private float timeLeft;
     private float newScale;
     private float shrinkRate;
     private bool ready;
+    private Vector3 ogScale;
 
     void Start()
     {
-        tMesh = countdownText.GetComponent<TextMeshPro>();
+        rectTransform = GetComponent<RectTransform>();
         tMesh.text = "";
         gameObject.SetActive(false);
+        ogScale = transform.localScale;
     }
 
     public void Alert(string text, float time)
@@ -39,8 +41,8 @@ public class InteractableAlert : MonoBehaviour
                 newScale -= shrinkRate * Time.deltaTime;
                 float tScale = newScale * gameObject.transform.localScale.x;
                 gameObject.transform.localScale = new Vector3(tScale, tScale, 1);
-                if (gameObject.transform.localScale.x < 0.1) {
-                    gameObject.transform.localScale = new Vector3(1f,1f,1f);
+                if (gameObject.transform.localScale.x < 0.1 * ogScale.x) {
+                    gameObject.transform.localScale = ogScale;
                     ready = false;
                     tMesh.text = "";
                     gameObject.SetActive(false);

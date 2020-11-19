@@ -67,6 +67,7 @@ public class SwarmController : MonoBehaviour
         if (Input.GetMouseButton(1)) {
             Vector3 newPos;
             bool valid = CanBePlacedAt(out newPos);
+            if (controlling.numBees < 400) valid = false;
             if (previewBees == null) {
                 previewBees = Instantiate(previewBeesPrefab, newPos, previewBeesPrefab.transform.rotation).GetComponent<Preview>();
             }
@@ -110,6 +111,7 @@ public class SwarmController : MonoBehaviour
         if (Input.GetKey(KeyCode.F)) {
             Vector3 newPos;
             bool valid = CanBePlacedAt(out newPos);
+            if (controlling.numBees < 400) valid = false;
             if (previewHive == null) {
                 previewHive = Instantiate(previewHivePrefab, newPos, previewHivePrefab.transform.rotation).GetComponent<Preview>();
             }
@@ -173,13 +175,26 @@ public class SwarmController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                if (hit.rigidbody != null && controlling.inRange.Contains(hit.rigidbody) && !hit.rigidbody.isKinematic)
-                {
-                    draggingObject = hit.rigidbody;
+                if (controlling.inRange.Contains(hit.rigidbody)) {
+                    Outline outline = hit.collider.GetComponent<Outline>();
+                    if (outline == null) outline = hit.collider.gameObject.AddComponent<Outline>();
+                    outline.OutlineWidth = 4;
+                    outline.OutlineColor = Color.yellow;
+                    outline.enabled = true;
+                    if (hit.rigidbody != null && !hit.rigidbody.isKinematic)
+                    {
+                        draggingObject = hit.rigidbody;
+                    }
                 }
             }
         }
         if (Input.GetButtonUp("Fire1")) {
+            if (draggingObject != null) {
+                Outline outline = draggingObject.GetComponent<Outline>();
+                if (outline == null) outline = draggingObject.gameObject.AddComponent<Outline>();
+                outline.OutlineWidth = 4;
+                outline.OutlineColor = Color.white;
+            }
             draggingObject = null;
         }
         if (draggingObject != null) {

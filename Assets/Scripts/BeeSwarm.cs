@@ -168,6 +168,11 @@ public class BeeSwarm : MonoBehaviour
                 if (!other.CompareTag("Player") && other.GetComponent<Rigidbody>() != null && (!other.isTrigger || other.CompareTag("Hive")))
                 {
                     inRange.Add(other.GetComponent<Rigidbody>());
+                    Outline outline = other.GetComponent<Outline>();
+                    if (outline == null) outline = other.gameObject.AddComponent<Outline>();
+                    outline.OutlineWidth = 4;
+                    outline.OutlineColor = Color.white;
+                    outline.enabled = true;
                 }
                 else if (other.GetComponent<BeeSwarm>() != null)
                 {
@@ -188,6 +193,8 @@ public class BeeSwarm : MonoBehaviour
 
     void OnTriggerExit (Collider other) {
         inRange.Remove(other.GetComponent<Rigidbody>());
+        Outline outline = other.GetComponent<Outline>();
+        if (outline != null) outline.enabled = false;
     }
 
     public bool HasClothes () {
