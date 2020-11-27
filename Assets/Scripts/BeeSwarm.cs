@@ -72,7 +72,7 @@ public class BeeSwarm : MonoBehaviour
         {   
             Vector3 newPosition;
 
-            bool validSpawn = SwarmController.i.CanBePlacedAt(out newPosition);
+            bool validSpawn = SwarmController.i.CheckMousePlacement(out newPosition);
 
             if(validSpawn){
                 BeeSwarm spawnedBees = Instantiate(newBees, newPosition, transform.rotation).GetComponent<BeeSwarm>();
@@ -92,7 +92,7 @@ public class BeeSwarm : MonoBehaviour
         {   
             Vector3 newPosition;
 
-            bool validSpawn = SwarmController.i.CanBePlacedAt(out newPosition);
+            bool validSpawn = SwarmController.i.CheckMousePlacement(out newPosition);
 
             if(validSpawn){
                 Hive spawnedHive = Instantiate(newHive, newPosition, newHive.transform.rotation).GetComponent<Hive>();

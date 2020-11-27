@@ -52,8 +52,7 @@ public abstract class Interactable : MonoBehaviour
             // Check to see if the mouse is over the interactable
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            int layerMask = (1 << 8) | (1 << 2);
-            layerMask = ~layerMask;
+            int layerMask = SwarmController.LAYER_MASK_IGNORE_PLAYER;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.rigidbody != null)

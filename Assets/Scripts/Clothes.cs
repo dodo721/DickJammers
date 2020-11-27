@@ -68,7 +68,7 @@ public class Clothes : Interactable
         if(equipped)
         {   
             Vector3 newPosition;
-            bool validSpawn = SwarmController.i.CanBePlacedAt(out newPosition);
+            bool validSpawn = SwarmController.i.CheckMousePlacement(out newPosition);
 
             if(validSpawn){
                 wornBy.clothes = null;

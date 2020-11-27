@@ -21,4 +21,9 @@ public class CameraFollower : MonoBehaviour
         if (target != null)
             transform.position = Vector3.Lerp(transform.position, target.position, smooth * Time.deltaTime);
     }
+
+    public void DebugTest () {
+        SwarmController.ControllerActionContext context = SwarmController.i.context;
+        Debug.Log("Triggered!\nInput value: " + context.inputValue + "\nHovering over " + context.hovered.name);
+    }
 }
